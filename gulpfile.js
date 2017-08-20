@@ -6,7 +6,7 @@ var outputDirName = "./output";
 var debugDirName = "./output/debug";
 var releaseDirName = "./output/release";
 var objDirName = "./obj";
-var outputHTMLFileName = "test_code.html"
+var outputHTMLFileName = "_Layout.html"
 var gulp = require('gulp');
 var path = require('path');
 var plumber = require('gulp-plumber');  // error handling
@@ -191,7 +191,7 @@ gulp.task('test', function () {
 gulp.task('rebuild_debug', function () {
 	runSequence(
 		'clean_debug',
-		'tslint',
+		//'tslint',
 		'sprite',
 		['copy_debug', 'ect', 'sass', 'ts'],
 		'test'

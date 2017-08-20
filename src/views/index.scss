@@ -1,0 +1,39 @@
+@import "../../obj/sprite";
+
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+	overflow-x: hidden; /* Prevent scroll on narrow devices */
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+
+	.body-inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+// no sprite image
+.sample_icn_07 {
+	background-image: url(../images/sample_icn_07.png);
+	width: 32px;
+  	height: 32px;
+}
+
+// no sprite image
+.sample_icn_08 {
+	background-image: url(../images/sample_icn_08.png);
+	width: 32px;
+  	height: 32px;
+}
+
+@import "main/main";
+@import "top_menu/top_menu";
