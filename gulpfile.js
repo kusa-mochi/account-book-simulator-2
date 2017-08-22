@@ -39,12 +39,14 @@ gulp.task('copy_debug', function () {
 	// copy library js files to output folder.
 	gulp.src([
 		'./node_modules/jquery/dist/jquery.min.js',
-		'./node_modules/bootstrap/dist/js/bootstrap.min.js'
+		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
+		'./node_modules/jquery-ui-dist/jquery-ui.min.js'
 	]).pipe(gulp.dest(path.join(debugDirName, 'js')));
 
 	// copy library css files to output folder.
 	gulp.src([
-		'./node_modules/bootstrap/dist/css/bootstrap.min.css'
+		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
+		'./node_modules/jquery-ui-dist/jquery-ui.min.css'
 	]).pipe(gulp.dest(path.join(debugDirName, 'css')));
 
 	// copy image files without sprite.
@@ -60,12 +62,14 @@ gulp.task('copy_release', function () {
 	// copy library js files to output folder.
 	gulp.src([
 		'./node_modules/jquery/dist/jquery.min.js',
-		'./node_modules/bootstrap/dist/js/bootstrap.min.js'
+		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
+		'./node_modules/jquery-ui-dist/jquery-ui.min.js'
 	]).pipe(gulp.dest(path.join(releaseDirName, 'js')));
 
 	// copy library css files to output folder.
 	gulp.src([
-		'./node_modules/bootstrap/dist/css/bootstrap.min.css'
+		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
+		'./node_modules/jquery-ui-dist/jquery-ui.min.css'
 	]).pipe(gulp.dest(path.join(releaseDirName, 'css')));
 
 	// copy image files without sprite.

@@ -1,4 +1,5 @@
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
+/// <reference path="../../node_modules/@types/jqueryui/index.d.ts" />
 /// <reference path="../../node_modules/@types/bootstrap/index.d.ts" />
 
 $(document).ready(() => {
@@ -7,6 +8,7 @@ $(document).ready(() => {
 		.css('pointer-events', 'none');
 
 	SetupTopMenuButtons();
+	SetupItemButtons();
 });
 
 function SetupTopMenuButtons(): void {
@@ -27,4 +29,14 @@ function SetupTopMenuButtons(): void {
 			.css('opacity', '1')
 			.css('pointer-events', 'auto');
 	});
+}
+
+function SetupItemButtons(): void {
+	$('#main .main-body .items-area.sortable').sortable({
+		revert: 100,
+		stop: (event, ui) => {
+			// TOOD: データの並べ替えが終わった後に行う処理をここに書く。
+		}
+	});
+	$('#main .main-body .items-area.sortable').disableSelection();
 }

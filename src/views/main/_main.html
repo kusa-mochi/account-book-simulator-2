@@ -21,5 +21,20 @@
 				</div>
 			</div>
 		</nav>
+		<div class="main-body">
+			<div class="main-body-left">
+				<div class="graph-area">
+				</div>
+				<ul class="items-area sortable">
+					<% for i in [1..10] : %>
+					<% for name in ['給与', '住宅ローン', '小学校学費（第一子）'] : %>
+					<li type="button" class="btn btn-default btn-lg item-button"><div><%- name %></div></li>
+					<% end %>
+					<% end %>
+				</ul>
+			</div>
+			<div class="main-body-right">
+			</div>
+		</div>
 	</div>
 </div>
