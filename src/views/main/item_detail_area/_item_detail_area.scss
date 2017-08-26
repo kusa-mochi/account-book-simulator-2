@@ -1,0 +1,26 @@
+.item-detail-area {
+	.item-name {
+		display: flex;
+		align-items: center;
+		padding: 10px;
+
+		> label {
+			width: 64px;
+		}
+	}
+	.item-frequency,
+	.item-term,
+	.item-zogen {
+		.panel-heading {
+			padding: 0;
+
+			.panel-title {
+				a {
+					display: block;
+					padding: 10px;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

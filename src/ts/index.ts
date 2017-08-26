@@ -36,7 +36,8 @@ function SetupItemButtons(): void {
 		revert: 100,
 		stop: (event, ui) => {
 			// TOOD: データの並べ替えが終わった後に行う処理をここに書く。
-		}
+		},
+		cancel: '.sortable-cancel'
 	});
 	$('#main .main-body .items-area.sortable').disableSelection();
 }
