@@ -41,6 +41,14 @@ function SetupItemButtons(): void {
 		cancel: '.sortable-cancel'
 	});
 	$('#main .main-body .items-area.sortable').disableSelection();
+
+	$(document).on('click', '#main .main-body .items-area .item-button', (e) => {
+		// すべてのitem-buttonから，selectedクラスを除外する。
+		$('#main .main-body .items-area .item-button').removeClass('selected');
+
+		// クリックされたitem-buttonにのみ，selectedクラスを付加する。
+		$(e.target).addClass('selected');
+	});
 }
 
 function SetupGraphArea(): void {

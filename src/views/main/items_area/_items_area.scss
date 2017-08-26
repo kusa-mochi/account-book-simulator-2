@@ -31,7 +31,8 @@
 			background-color: #e6e6e6;
 		}
 
-		&:active {
+		&:active,
+		&.selected {
 			background-color: #d4d4d4;
 		}
 
@@ -50,6 +51,7 @@
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
+			pointer-events: none;
 		}
 	}
 }
