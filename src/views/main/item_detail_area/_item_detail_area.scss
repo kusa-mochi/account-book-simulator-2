@@ -1,8 +1,10 @@
 .item-detail-area {
+	padding: 5px;
+
 	.item-name {
 		display: flex;
 		align-items: center;
-		padding: 10px;
+		margin-bottom: 5px;
 
 		> label {
 			width: 64px;
