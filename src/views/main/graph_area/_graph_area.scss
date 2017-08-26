@@ -1,5 +1,6 @@
 .graph-area {
 	float: left;
+	padding: 5px;
 	width: 100%;
 	height: calc(100% - #{$items_area_height});
 	background-color: white;

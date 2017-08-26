@@ -40,7 +40,8 @@ gulp.task('copy_debug', function () {
 	gulp.src([
 		'./node_modules/jquery/dist/jquery.min.js',
 		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.js'
+		'./node_modules/jquery-ui-dist/jquery-ui.min.js',
+		'./node_modules/chart.js/dist/Chart.bundle.min.js'
 	]).pipe(gulp.dest(path.join(debugDirName, 'js')));
 
 	// copy library css files to output folder.
@@ -63,7 +64,8 @@ gulp.task('copy_release', function () {
 	gulp.src([
 		'./node_modules/jquery/dist/jquery.min.js',
 		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.js'
+		'./node_modules/jquery-ui-dist/jquery-ui.min.js',
+		'./node_modules/chart.js/dist/Chart.bundle.min.js'
 	]).pipe(gulp.dest(path.join(releaseDirName, 'js')));
 
 	// copy library css files to output folder.
