@@ -40,13 +40,7 @@ $info_text_color: #444444;
 				width: calc(100% - #{$main_body_right_width});
 				height: 100%;
 
-				.graph-area {
-					float: left;
-					width: 100%;
-					height: calc(100% - #{$items_area_height});
-					background-color: white;
-				}
-
+				@import 'main/graph_area/graph_area';
 				@import 'main/items_area/items_area';
 			}
 
