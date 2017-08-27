@@ -47,7 +47,15 @@
 			}
 		}
 
-		> div {
+		.item-button__checkbox {
+			width: 18px;
+			height: 18px;
+			margin-top: -34px;
+			margin-left: -12px;
+			border-radius: 2px;
+		}
+
+		.item-button__label {
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
