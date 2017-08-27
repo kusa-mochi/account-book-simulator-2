@@ -12,7 +12,7 @@
 	.item-button {
 		display: flex;
 		align-items: center;
-		min-width: 50px;
+		min-width: 150px;
 		max-width: 250px;
 		height: 65px;
 		margin: 2px;
@@ -60,6 +60,14 @@
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			pointer-events: none;
+			margin-top: 20px;
+			min-width: 104px;
+			text-align: center;
+		}
+
+		.glyphicon {
+			margin-right: -12px;
+			margin-top: -32px;
 		}
 	}
 }

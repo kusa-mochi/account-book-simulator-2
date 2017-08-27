@@ -55,6 +55,15 @@ gulp.task('copy_debug', function () {
 		path.join(sourceDirName, 'images/*'),
 		'!./src/images/sprite/**/*'
 	]).pipe(gulp.dest(path.join(debugDirName, 'images')));
+
+	// copy font files to output folder.
+	gulp.src([
+		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
+		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
+	]).pipe(gulp.dest(path.join(debugDirName, 'fonts')));
 });
 
 
@@ -78,6 +87,11 @@ gulp.task('copy_release', function () {
 	gulp.src([
 		path.join(debugDirName, 'images/**/*')
 	]).pipe(gulp.dest(path.join(releaseDirName, 'images')));
+
+	// copy font files to output folder.
+	gulp.src([
+		'./node_modules/bootstrap/dist/fonts/*'
+	]).pipe(gulp.dest(path.join(releaseDirName, 'fonts')));
 });
 
 
