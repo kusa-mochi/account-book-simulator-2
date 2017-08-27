@@ -115,17 +115,19 @@ function SetupGraphArea(): void {
 		},
 		//オプションの設定
 		options: {
-			// scales: {
-			// 	//縦軸の設定
-			// 	yAxes: [{
-			// 		ticks: {
-			// 			//最小値を0にする
-			// 			beginAtZero: true
-			// 		}
-			// 	}]
-			// },
+			scales: {
+				Axes: [{
+					stacked: true,
+					ticks: {
+						userCallback: (value, index, values) => {
+							value = value.toString().split(/(?=(?:...)*$)/).join(',');
+							return value;
+						}
+					}
+				}]
+			},
 			responsive: true,
-			maintainAspectRatio: false
+			maintainAspectRatio: false,
 		}
 	});
 }

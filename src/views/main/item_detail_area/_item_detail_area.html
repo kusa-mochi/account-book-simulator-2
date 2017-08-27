@@ -3,18 +3,51 @@
 		<label>項目名</label>
 		<input type="text" name="item-name" class="form-control">
 	</div>
+	<label class="radio-inline active"><input checked type="radio" name="spending-income">支出</label>
+	<label class="radio-inline"><input type="radio" name="spending-income" value="">収入</label>
 	<div class="panel-group" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default item-frequency">
 			<div class="panel-heading" role="tab" id="headingOne">
 				<h4 class="panel-title">
 					<a class="collapsed" data-toggle="collapse" role="button" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 						頻度
-					  </a>
+					</a>
 				</h4>
 			</div>
 			<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 				<div class="panel-body">
-					コンテンツ１
+					<label class="radio-inline active"><input checked type="radio" name="frequency">毎月</label>
+					<label class="radio-inline"><input type="radio" name="frequency">毎年</label>
+					<label class="radio-inline"><input type="radio" name="frequency">1回限り</label>
+					<div class="frequency-monthly">
+						<div class="frequency-count">
+							<input type="text" name="frequency-count" class="form-control">
+							<label>回</label>
+						</div>
+					</div>
+					<div class="frequency-every-year">
+						<div class="frequency-month">
+							<input type="text" name="frequency-month" class="form-control">
+							<label>月</label>
+						</div>
+					</div>
+					<div class="frequency-one-time">
+						<div class="form-group">
+							<label class="control-label">年月</label>
+							<div class="form-inline">
+								<div class="input-group date">
+									<input type="text" class="form-control" value="">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="amount">
+						<label>金額&nbsp;[円]</label>
+						<input type="text" name="amount" class="form-control">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -23,12 +56,37 @@
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 						期間
-					  </a>
+					</a>
 				</h4>
 			</div>
 			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 				<div class="panel-body">
-					コンテンツ２
+					<div class="term-from">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">開始</label>
+							<div class="col-sm-9 form-inline">
+								<div class="input-group date">
+									<input type="text" class="form-control" value="">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="term-to">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">終了</label>
+							<div class="col-sm-9 form-inline">
+								<div class="input-group date">
+									<input type="text" class="form-control" value="">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,13 +94,44 @@
 			<div class="panel-heading" role="tab" id="headingThree">
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						増減
-					  </a>
+						金額の増減
+					</a>
 				</h4>
 			</div>
 			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 				<div class="panel-body">
-					コンテンツ３
+					<label class="radio-inline active"><input checked type="radio" name="zogen" value="">毎月</label>
+					<label class="radio-inline"><input type="radio" name="zogen" value="">毎年</label>
+					<label class="radio-inline"><input type="radio" name="zogen" value="">1回限り</label>
+					<div class="frequency-monthly">
+						<div class="frequency-count">
+							<input type="text" name="frequency-count" class="form-control">
+							<label>回</label>
+						</div>
+					</div>
+					<div class="frequency-every-year">
+						<div class="frequency-month">
+							<input type="text" name="frequency-month" class="form-control">
+							<label>月</label>
+						</div>
+					</div>
+					<div class="frequency-one-time">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">年月</label>
+							<div class="col-sm-9 form-inline">
+								<div class="input-group date">
+									<input type="text" class="form-control" value="">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="amount">
+						<label>金額&nbsp;[円]</label>
+						<input type="text" name="amount" class="form-control">
+					</div>
 				</div>
 			</div>
 		</div>

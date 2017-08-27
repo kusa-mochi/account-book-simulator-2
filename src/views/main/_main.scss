@@ -49,6 +49,8 @@ $info_text_color: #444444;
 				width: $main_body_right_width;
 				height: 100%;
 				background-color: $main_body_right_bg;
+				overflow-y: scroll;
+				overflow-x: hidden;
 
 				@import 'main/item_detail_area/item_detail_area';
 			}

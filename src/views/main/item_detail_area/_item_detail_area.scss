@@ -1,6 +1,11 @@
 .item-detail-area {
 	padding: 5px;
 
+	label {
+		margin-bottom: 0;
+		font-weight: 400;
+	}
+
 	.item-name {
 		display: flex;
 		align-items: center;
@@ -10,6 +15,71 @@
 			width: 64px;
 		}
 	}
+
+	.radio-inline {
+		margin-bottom: 5px;
+	}
+
+	.frequency-monthly {
+		width: 100%;
+
+		.frequency-count {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			width: 100%;
+
+			input {
+				width: 100px;
+			}
+		}
+	}
+
+	.frequency-every-year {
+		width: 100%;
+
+		.frequency-month {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			width: 100%;
+
+			input {
+				width: 100px;
+			}
+		}
+	}
+
+	.frequency-one-time {
+		width: 100%;
+
+		.form-group {
+			display: flex;
+			align-items: center;
+			width: 100%;
+
+			label {
+				padding: 0;
+				width: 44px;
+			}
+
+			.form-inline {
+				padding: 0;
+				width: auto;
+			}
+		}
+	}
+
+	.amount {
+		display: flex;
+		align-items: center;
+		width: 100%;
+
+		label {
+			width: 84px;
+		}
+	}
+
 	.item-frequency,
 	.item-term,
 	.item-zogen {
@@ -24,6 +94,24 @@
 					padding: 10px;
 					text-decoration: none;
 				}
+			}
+		}
+	}
+
+	.item-term {
+		.form-group {
+			display: flex;
+			align-items: center;
+			width: 100%;
+
+			label {
+				padding: 0;
+				width: 44px;
+			}
+
+			.form-inline {
+				padding: 0;
+				width: auto;
 			}
 		}
 	}
