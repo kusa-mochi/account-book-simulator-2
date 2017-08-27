@@ -21,6 +21,7 @@
 	}
 
 	.frequency-monthly {
+		margin-bottom: 15px;
 		width: 100%;
 
 		.frequency-count {
@@ -32,10 +33,15 @@
 			input {
 				width: 100px;
 			}
+
+			label {
+				margin-left: 5px;
+			}
 		}
 	}
 
 	.frequency-every-year {
+		margin-bottom: 15px;
 		width: 100%;
 
 		.frequency-month {
@@ -46,6 +52,10 @@
 
 			input {
 				width: 100px;
+			}
+
+			label {
+				margin-left: 5px;
 			}
 		}
 	}
@@ -59,8 +69,9 @@
 			width: 100%;
 
 			label {
-				padding: 0;
-				width: 44px;
+				padding: 0px 5px 0px 0px;
+				width: 76px;
+				text-align: right;
 			}
 
 			.form-inline {
@@ -112,6 +123,12 @@
 			.form-inline {
 				padding: 0;
 				width: auto;
+			}
+		}
+
+		.term-to {
+			.form-group {
+				margin-bottom: 0;
 			}
 		}
 	}

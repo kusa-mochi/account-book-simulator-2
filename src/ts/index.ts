@@ -10,6 +10,7 @@ $(document).ready(() => {
 	SetupTopMenuButtons();
 	SetupItemButtons();
 	SetupGraphArea();
+	SetupItemDetailArea();
 });
 
 function SetupTopMenuButtons(): void {
@@ -129,5 +130,32 @@ function SetupGraphArea(): void {
 			responsive: true,
 			maintainAspectRatio: false,
 		}
+	});
+}
+
+function SetupItemDetailArea(): void {
+	$('.item-detail-area .frequency-every-year').css('display', 'none');
+	$('.item-detail-area .frequency-one-time').css('display', 'none');
+
+	['frequency', 'zogen'].forEach((s) => {
+		$('.item-detail-area .item-' + s + ' input[type=radio][name=' + s + ']').change(function () {
+			switch(this.value) {
+				case 'monthly':
+					$('.item-detail-area .item-' + s + ' .frequency-monthly').css('display', 'block');
+					$('.item-detail-area .item-' + s + ' .frequency-every-year').css('display', 'none');
+					$('.item-detail-area .item-' + s + ' .frequency-one-time').css('display', 'none');
+					break;
+				case 'every-year':
+					$('.item-detail-area .item-' + s + ' .frequency-monthly').css('display', 'none');
+					$('.item-detail-area .item-' + s + ' .frequency-every-year').css('display', 'block');
+					$('.item-detail-area .item-' + s + ' .frequency-one-time').css('display', 'none');
+					break;
+				case 'one-time':
+					$('.item-detail-area .item-' + s + ' .frequency-monthly').css('display', 'none');
+					$('.item-detail-area .item-' + s + ' .frequency-every-year').css('display', 'none');
+					$('.item-detail-area .item-' + s + ' .frequency-one-time').css('display', 'block');
+					break;
+			}
+		});
 	});
 }
