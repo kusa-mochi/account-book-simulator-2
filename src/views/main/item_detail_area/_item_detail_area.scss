@@ -30,8 +30,12 @@
 			justify-content: flex-end;
 			width: 100%;
 
-			input {
+			.btn-group {
 				width: 100px;
+
+				> button {
+					width: 100px;
+				}
 			}
 
 			label {

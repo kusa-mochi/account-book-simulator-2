@@ -21,7 +21,17 @@
 					<label class="radio-inline"><input type="radio" name="frequency" value="one-time">1回限り</label>
 					<div class="frequency-monthly">
 						<div class="frequency-count">
-							<input type="text" name="frequency-count" class="form-control">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									<!--ここに選択文字列を書く--><span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<% for i in [1..31] : %>
+									<li><a href="#"><%- i %></a></li>
+									<% end %>
+								</ul>
+							</div>
+							<!-- <input type="text" name="frequency-count" class="form-control"> -->
 							<label>回</label>
 						</div>
 					</div>
@@ -105,7 +115,17 @@
 					<label class="radio-inline"><input type="radio" name="zogen" value="one-time">1回限り</label>
 					<div class="frequency-monthly">
 						<div class="frequency-count">
-							<input type="text" name="frequency-count" class="form-control">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									<!--ここに選択文字列を書く--><span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<% for i in [1..31] : %>
+									<li><a href="#"><%- i %></a></li>
+									<% end %>
+								</ul>
+							</div>
+							<!-- <input type="text" name="frequency-count" class="form-control"> -->
 							<label>回</label>
 						</div>
 					</div>
