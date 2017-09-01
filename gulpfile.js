@@ -41,13 +41,17 @@ gulp.task('copy_debug', function () {
 		'./node_modules/jquery/dist/jquery.min.js',
 		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
 		'./node_modules/jquery-ui-dist/jquery-ui.min.js',
-		'./node_modules/chart.js/dist/Chart.bundle.min.js'
+		'./node_modules/chart.js/dist/Chart.bundle.min.js',
+		'./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+		'./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js',
+		path.join(sourceDirName, 'lib/bootstrap-number-input/bootstrap-number-input.js')
 	]).pipe(gulp.dest(path.join(debugDirName, 'js')));
 
 	// copy library css files to output folder.
 	gulp.src([
 		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.css'
+		'./node_modules/jquery-ui-dist/jquery-ui.min.css',
+		'./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
 	]).pipe(gulp.dest(path.join(debugDirName, 'css')));
 
 	// copy image files without sprite.
@@ -74,13 +78,17 @@ gulp.task('copy_release', function () {
 		'./node_modules/jquery/dist/jquery.min.js',
 		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
 		'./node_modules/jquery-ui-dist/jquery-ui.min.js',
-		'./node_modules/chart.js/dist/Chart.bundle.min.js'
+		'./node_modules/chart.js/dist/Chart.bundle.min.js',
+		'./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+		'./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js',
+		path.join(sourceDirName, 'lib/bootstrap-number-input/bootstrap-number-input.js')
 	]).pipe(gulp.dest(path.join(releaseDirName, 'js')));
 
 	// copy library css files to output folder.
 	gulp.src([
 		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.css'
+		'./node_modules/jquery-ui-dist/jquery-ui.min.css',
+		'./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
 	]).pipe(gulp.dest(path.join(releaseDirName, 'css')));
 
 	// copy image files without sprite.

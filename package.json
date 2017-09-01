@@ -18,10 +18,12 @@
   "homepage": "https://github.com/kusa-mochi/vscode_gulp_template#readme",
   "devDependencies": {
     "@types/bootstrap": "^3.3.35",
+    "@types/bootstrap-datepicker": "0.0.10",
     "@types/chart.js": "^2.6.3",
     "@types/jquery": "^3.2.8",
     "@types/jqueryui": "^1.11.35",
     "bootstrap": "^3.3.7",
+    "bootstrap-datepicker": "^1.7.1",
     "chart.js": "^2.6.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",

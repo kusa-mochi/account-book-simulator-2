@@ -1,3 +1,5 @@
+/// <reference path="bootstrap-number-input.d.ts"/>
+
 enum FrequencyMode {
 	Monthly,
 	EveryYear,
@@ -34,6 +36,10 @@ interface ItemData {
 }
 
 var items: ItemData[] = new Array();
+
+// function separate(num) {
+// 	return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+// }
 
 $(document).ready(() => {
 	$('#main')
@@ -157,6 +163,7 @@ function SetupItemButtons(): void {
 	});
 	$('#main .main-body .items-area.sortable').disableSelection();
 
+	// 各費用項目ボタンがクリックされた場合の処理
 	$(document).on('click', '#main .main-body .items-area .item-button', (e) => {
 		// すべてのitem-buttonから，selectedクラスを除外する。
 		$('#main .main-body .items-area .item-button').removeClass('selected');
@@ -168,12 +175,17 @@ function SetupItemButtons(): void {
 		var itemName = $(e.target).children('.item-button__label').text();
 		items.forEach((item) => {
 			if (item.name == itemName) {
+				// 費用項目名
 				$('.item-detail-area .item-name input[name=item-name]').val(item.name);
+
+				// 支出／収入
 				$(item.spendingIncome ? 'input[name=spending-income]:nth(0)' : 'input[name=spending-income]:nth(1)').prop('checked', true);
-				switch(item.frequency.mode)
-				{
+
+				// 頻度：「毎月・毎年・一度だけ」
+				switch (item.frequency.mode) {
 					case FrequencyMode.Monthly:
 						$('input[name=frequency]:nth(0)').prop('checked', true);
+						$('.item-detail-area .item-frequency .frequency-count input[name=frequency-count]').val(item.frequency.count);
 						break;
 					case FrequencyMode.EveryYear:
 						$('input[name=frequency]:nth(1)').prop('checked', true);
@@ -182,6 +194,26 @@ function SetupItemButtons(): void {
 						$('input[name=frequency]:nth(2)').prop('checked', true);
 						break;
 				}
+
+				// 頻度：金額
+				$('.item-detail-area .item-frequency .amount input[name=amount]').val(item.frequency.amount);
+
+				// 金額の増減：「毎月・毎年・一度だけ」
+				switch (item.zogen.mode) {
+					case FrequencyMode.Monthly:
+						$('input[name=zogen]:nth(0)').prop('checked', true);
+						$('.item-detail-area .item-zogen .frequency-count input[name=frequency-count]').val(item.zogen.count);
+						break;
+					case FrequencyMode.EveryYear:
+						$('input[name=zogen]:nth(1)').prop('checked', true);
+						break;
+					case FrequencyMode.OneTime:
+						$('input[name=zogen]:nth(2)').prop('checked', true);
+						break;
+				}
+
+				// 金額の増減：金額
+				$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
 			}
 		});
 	});
@@ -194,7 +226,7 @@ function SetupGraphArea(): void {
 	$('#LineChart').attr('width', w);
 	$('#LineChart').attr('height', h);
 	var ctx = document.getElementById("LineChart");
-	var myLineChart = new Chart(ctx, {
+	var myLineChart = new Chart($(ctx), {
 		//グラフの種類
 		type: 'line',
 		//データの設定
@@ -268,6 +300,15 @@ function SetupGraphArea(): void {
 	});
 }
 
+function ChangeFrequencyMode(panelName: string, monthly: boolean, everyYear: boolean, oneTime: boolean) {
+	var b2d = (b: boolean) => {
+		return (b ? 'block' : 'none');
+	};
+	$('.item-detail-area .item-' + panelName + ' .frequency-monthly').css('display', b2d(monthly));
+	$('.item-detail-area .item-' + panelName + ' .frequency-every-year').css('display', b2d(everyYear));
+	$('.item-detail-area .item-' + panelName + ' .frequency-one-time').css('display', b2d(oneTime));
+}
+
 function SetupItemDetailArea(): void {
 	$('.item-detail-area .frequency-every-year').css('display', 'none');
 	$('.item-detail-area .frequency-one-time').css('display', 'none');
@@ -276,21 +317,29 @@ function SetupItemDetailArea(): void {
 		$('.item-detail-area .item-' + s + ' input[type=radio][name=' + s + ']').change(function () {
 			switch (this.value) {
 				case 'monthly':
-					$('.item-detail-area .item-' + s + ' .frequency-monthly').css('display', 'block');
-					$('.item-detail-area .item-' + s + ' .frequency-every-year').css('display', 'none');
-					$('.item-detail-area .item-' + s + ' .frequency-one-time').css('display', 'none');
+					ChangeFrequencyMode(s, true, false, false);
 					break;
 				case 'every-year':
-					$('.item-detail-area .item-' + s + ' .frequency-monthly').css('display', 'none');
-					$('.item-detail-area .item-' + s + ' .frequency-every-year').css('display', 'block');
-					$('.item-detail-area .item-' + s + ' .frequency-one-time').css('display', 'none');
+					ChangeFrequencyMode(s, false, true, false);
 					break;
 				case 'one-time':
-					$('.item-detail-area .item-' + s + ' .frequency-monthly').css('display', 'none');
-					$('.item-detail-area .item-' + s + ' .frequency-every-year').css('display', 'none');
-					$('.item-detail-area .item-' + s + ' .frequency-one-time').css('display', 'block');
+					ChangeFrequencyMode(s, false, false, true);
 					break;
 			}
 		});
+	});
+
+	$('.item-detail-area .frequency-count input[name=frequency-count]').bootstrapNumber({
+		// default, danger, success , warning, info, primary
+		upClass: 'default',
+		downClass: 'default',
+		center: true
+	});
+
+	$(".item-detail-area .item-term .input-append").datepicker({
+		format: "yyyy年mm月",
+		startView: "months",
+		minViewMode: "months",
+		autoclose: true
 	});
 }
