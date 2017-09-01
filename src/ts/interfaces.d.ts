@@ -1,5 +1,5 @@
 interface JQuery {
-	datepicker(param): void
+	datepicker(param): JQuery
 }
 
 interface HTMLElement {

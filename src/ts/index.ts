@@ -36,10 +36,7 @@ interface ItemData {
 }
 
 var items: ItemData[] = new Array();
-
-// function separate(num) {
-// 	return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
-// }
+var selectedItemIndex = -1;
 
 $(document).ready(() => {
 	$('#main')
@@ -51,6 +48,16 @@ $(document).ready(() => {
 	SetupGraphArea();
 	SetupItemDetailArea();
 });
+
+function GetItemIndex(itemName: string): number {
+	for (var i = 0; i < items.length; i++) {
+		if (items[i].name == itemName) {
+			return i;
+		}
+	}
+
+	return -1;
+}
 
 function ResetData(): void {
 
@@ -173,49 +180,47 @@ function SetupItemButtons(): void {
 
 		// TODO: 詳細表示領域に，費用項目の詳細情報を表示する。
 		var itemName = $(e.target).children('.item-button__label').text();
-		items.forEach((item) => {
-			if (item.name == itemName) {
-				// 費用項目名
-				$('.item-detail-area .item-name input[name=item-name]').val(item.name);
+		selectedItemIndex = GetItemIndex(itemName);
+		var item = items[selectedItemIndex];
+		// 費用項目名
+		$('.item-detail-area .item-name input[name=item-name]').val(item.name);
 
-				// 支出／収入
-				$(item.spendingIncome ? 'input[name=spending-income]:nth(0)' : 'input[name=spending-income]:nth(1)').prop('checked', true);
+		// 支出／収入
+		$(item.spendingIncome ? 'input[name=spending-income]:nth(0)' : 'input[name=spending-income]:nth(1)').prop('checked', true);
 
-				// 頻度：「毎月・毎年・一度だけ」
-				switch (item.frequency.mode) {
-					case FrequencyMode.Monthly:
-						$('input[name=frequency]:nth(0)').prop('checked', true);
-						$('.item-detail-area .item-frequency .frequency-count input[name=frequency-count]').val(item.frequency.count);
-						break;
-					case FrequencyMode.EveryYear:
-						$('input[name=frequency]:nth(1)').prop('checked', true);
-						break;
-					case FrequencyMode.OneTime:
-						$('input[name=frequency]:nth(2)').prop('checked', true);
-						break;
-				}
+		// 頻度：「毎月・毎年・一度だけ」
+		switch (item.frequency.mode) {
+			case FrequencyMode.Monthly:
+				$('input[name=frequency]:nth(0)').prop('checked', true);
+				$('.item-detail-area .item-frequency .frequency-count input[name=frequency-count]').val(item.frequency.count);
+				break;
+			case FrequencyMode.EveryYear:
+				$('input[name=frequency]:nth(1)').prop('checked', true);
+				break;
+			case FrequencyMode.OneTime:
+				$('input[name=frequency]:nth(2)').prop('checked', true);
+				break;
+		}
 
-				// 頻度：金額
-				$('.item-detail-area .item-frequency .amount input[name=amount]').val(item.frequency.amount);
+		// 頻度：金額
+		$('.item-detail-area .item-frequency .amount input[name=amount]').val(item.frequency.amount);
 
-				// 金額の増減：「毎月・毎年・一度だけ」
-				switch (item.zogen.mode) {
-					case FrequencyMode.Monthly:
-						$('input[name=zogen]:nth(0)').prop('checked', true);
-						$('.item-detail-area .item-zogen .frequency-count input[name=frequency-count]').val(item.zogen.count);
-						break;
-					case FrequencyMode.EveryYear:
-						$('input[name=zogen]:nth(1)').prop('checked', true);
-						break;
-					case FrequencyMode.OneTime:
-						$('input[name=zogen]:nth(2)').prop('checked', true);
-						break;
-				}
+		// 金額の増減：「毎月・毎年・一度だけ」
+		switch (item.zogen.mode) {
+			case FrequencyMode.Monthly:
+				$('input[name=zogen]:nth(0)').prop('checked', true);
+				$('.item-detail-area .item-zogen .frequency-count input[name=frequency-count]').val(item.zogen.count);
+				break;
+			case FrequencyMode.EveryYear:
+				$('input[name=zogen]:nth(1)').prop('checked', true);
+				break;
+			case FrequencyMode.OneTime:
+				$('input[name=zogen]:nth(2)').prop('checked', true);
+				break;
+		}
 
-				// 金額の増減：金額
-				$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
-			}
-		});
+		// 金額の増減：金額
+		$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
 	});
 }
 
@@ -336,10 +341,29 @@ function SetupItemDetailArea(): void {
 		center: true
 	});
 
-	$(".item-detail-area .item-term .input-append").datepicker({
+	$(".item-detail-area .item-term .term-from .input-append").datepicker({
 		format: "yyyy年mm月",
 		startView: "months",
 		minViewMode: "months",
 		autoclose: true
+	}).on('changeDate', function (e) {
+		var selectedDate = e['date'];
+		var year = selectedDate.getFullYear();
+		var month = selectedDate.getMonth();
+		// 開始年月のデータを上書きする。
+		items[selectedItemIndex].term.from = new Date(year, month);
+	});
+
+	$(".item-detail-area .item-term .term-to .input-append").datepicker({
+		format: "yyyy年mm月",
+		startView: "months",
+		minViewMode: "months",
+		autoclose: true
+	}).on('changeDate', function (e) {
+		var selectedDate = e['date'];
+		var year = selectedDate.getFullYear();
+		var month = selectedDate.getMonth();
+		// 終了年月のデータを上書きする。
+		items[selectedItemIndex].term.to = new Date(year, month);
 	});
 }
