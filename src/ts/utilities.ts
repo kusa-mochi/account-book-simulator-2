@@ -1,7 +1,7 @@
 module App.Utilities {
 	export function GetItemIndex(itemName: string): number {
-		for (var i = 0; i < items.length; i++) {
-			if (items[i].name == itemName) {
+		for (var i = 0; i < App.Params.items.length; i++) {
+			if (App.Params.items[i].name == itemName) {
 				return i;
 			}
 		}
@@ -20,7 +20,7 @@ module App.Utilities {
 
 	export function DataToGUI(): void {
 		// データを費用項目一覧に反映する。
-		for (var i = items.length - 1; i >= 0; i--) {
+		for (var i = App.Params.items.length - 1; i >= 0; i--) {
 			$('#main .items-area').prepend(
 				$('<li type="button" class="btn btn-default btn-lg item-button"></li>')
 					.append(
@@ -28,7 +28,7 @@ module App.Utilities {
 					)
 					.append(
 					$('<div class="item-button__label"></div>')
-						.text(items[i].name)
+						.text(App.Params.items[i].name)
 					)
 					.append(
 					$('<button class="btn btn-default glyphicon glyphicon-remove"></button>')

@@ -1,3 +1,5 @@
+/// <reference path="enums.ts"/>
+
 interface JQuery {
 	datepicker(param): JQuery
 }
@@ -7,7 +9,7 @@ interface HTMLElement {
 }
 
 interface FrequencyData {
-	mode: FrequencyMode,
+	mode: App.Enums.FrequencyMode,
 	count?: number,
 	month?: number,
 	date?: Date,
@@ -20,7 +22,7 @@ interface TermData {
 }
 
 interface ZogenData {
-	mode: FrequencyMode,
+	mode: App.Enums.FrequencyMode,
 	count?: number,
 	month?: number,
 	date?: Date,

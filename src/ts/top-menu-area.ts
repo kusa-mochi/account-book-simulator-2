@@ -9,12 +9,12 @@ module App.TopMenuArea {
 				.css('pointer-events', 'auto');
 
 			// 新規データの作成
-			items.push(
+			App.Params.items.push(
 				{
 					name: '給与',
 					spendingIncome: false,	// income
 					frequency: {
-						mode: FrequencyMode.Monthly,
+						mode: App.Enums.FrequencyMode.Monthly,
 						count: 1,
 						amount: 200000
 					},
@@ -23,18 +23,18 @@ module App.TopMenuArea {
 						to: new Date(2037, 2)
 					},
 					zogen: {
-						mode: FrequencyMode.EveryYear,
+						mode: App.Enums.FrequencyMode.EveryYear,
 						month: 3,
 						amount: 4000
 					}
 				}
 			);
-			items.push(
+			App.Params.items.push(
 				{
 					name: '住宅ローン',
 					spendingIncome: true,	// spending
 					frequency: {
-						mode: FrequencyMode.Monthly,
+						mode: App.Enums.FrequencyMode.Monthly,
 						count: 1,
 						amount: 90000
 					},
@@ -43,7 +43,7 @@ module App.TopMenuArea {
 						to: new Date(2045, 2)
 					},
 					zogen: {
-						mode: FrequencyMode.OneTime,
+						mode: App.Enums.FrequencyMode.OneTime,
 						date: new Date(2017, 8),
 						amount: 0
 					}

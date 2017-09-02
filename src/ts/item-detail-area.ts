@@ -36,7 +36,7 @@ module App.ItemDetailArea {
 			var year = selectedDate.getFullYear();
 			var month = selectedDate.getMonth();
 			// 開始年月のデータを上書きする。
-			items[selectedItemIndex].term.from = new Date(year, month);
+			App.Params.items[App.Params.selectedItemIndex].term.from = new Date(year, month);
 		});
 
 		$(".item-detail-area .item-term .term-to .input-append").datepicker({
@@ -49,7 +49,7 @@ module App.ItemDetailArea {
 			var year = selectedDate.getFullYear();
 			var month = selectedDate.getMonth();
 			// 終了年月のデータを上書きする。
-			items[selectedItemIndex].term.to = new Date(year, month);
+			App.Params.items[App.Params.selectedItemIndex].term.to = new Date(year, month);
 		});
 	}
 

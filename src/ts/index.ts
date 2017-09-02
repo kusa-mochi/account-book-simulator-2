@@ -6,15 +6,6 @@
 /// <reference path="item-detail-area.ts"/>
 /// <reference path="graph-area.ts"/>
 
-enum FrequencyMode {
-	Monthly,
-	EveryYear,
-	OneTime
-}
-
-var items: ItemData[] = new Array();
-var selectedItemIndex = -1;
-
 module App.Main {
 	$(document).ready(() => {
 		$('#main')
