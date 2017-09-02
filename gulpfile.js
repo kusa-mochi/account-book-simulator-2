@@ -1,7 +1,7 @@
 // to run tasks, do Ctrl+Shift+B
 
 var sourceDirName = "./src";
-var outputFileName = "index.js";
+var outputFileName = "account-book-simulator-2.js";
 var outputDirName = "./output";
 var debugDirName = "./output/debug";
 var releaseDirName = "./output/release";
@@ -190,8 +190,10 @@ gulp.task('ts', function () {
 	return gulp.src([
 		path.join(sourceDirName, 'ts/**/*.ts'),
 		'!./node_modules/**'    // except files below node_modules folder
-	]).pipe(typescript())
-		.pipe(gulp.dest(path.join(debugDirName, 'js')));
+	]).pipe(typescript({
+		removeComments: true,
+		out: outputFileName
+	})).pipe(gulp.dest(path.join(debugDirName, 'js')));
 });
 
 
