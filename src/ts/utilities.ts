@@ -42,4 +42,25 @@ module App.Utilities {
 	export function GUIToData(): void {
 
 	}
+
+	// 費用項目詳細情報表示領域の，頻度情報に応じて，設定項目を切り替える処理。
+	export function ChangeFrequencyMode(panelName: string, monthly: boolean, everyYear: boolean, oneTime: boolean) {
+		var b2d = (b: boolean) => {
+			return (b ? 'block' : 'none');
+		};
+		$('.item-detail-area .item-' + panelName + ' .frequency-monthly').css('display', b2d(monthly));
+		$('.item-detail-area .item-' + panelName + ' .frequency-every-year').css('display', b2d(everyYear));
+		$('.item-detail-area .item-' + panelName + ' .frequency-one-time').css('display', b2d(oneTime));
+	}
+
+	// 年月に固有の整数値を計算する。年月が進むほど，値は一様に大きくなる。
+	export function GetDateValue(d: Date): number {
+		var output = (12 * (d.getFullYear() - 1900)) + d.getMonth();
+		return output;
+	}
+
+	// 2つの年月の間の月数（何カ月あるか）をもとめる。
+	export function GetNumMonths(dFrom: Date, dTo: Date): number {
+		return ((12 * (dTo.getFullYear() - dFrom.getFullYear())) + dTo.getMonth() - dFrom.getMonth());
+	}
 }

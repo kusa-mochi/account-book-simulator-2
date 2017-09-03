@@ -27,20 +27,25 @@
 					</div>
 					<div class="frequency-every-year">
 						<div class="frequency-month">
-							<input type="text" name="frequency-month" class="form-control">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									1<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<% for i in [1..12] : %>
+									<li><a href="#"><%- i %></a></li>
+									<% end %>
+								</ul>
+							</div>
 							<label>月</label>
 						</div>
 					</div>
 					<div class="frequency-one-time">
 						<div class="form-group">
 							<label class="control-label">年月</label>
-							<div class="form-inline">
-								<div class="input-group date">
-									<input type="text" class="form-control" value="">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</div>
+							<div class="input-append date" data-date="2017年09月" data-date-format="yyyy年mm月">
+								<input type="text" readonly="readonly" name="date">
+								<span class="add-on"><i class="icon-th"></i></span>
 							</div>
 						</div>
 					</div>
@@ -103,20 +108,25 @@
 					</div>
 					<div class="frequency-every-year">
 						<div class="frequency-month">
-							<input type="text" name="frequency-month" class="form-control">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									1<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<% for i in [1..12] : %>
+									<li><a href="#"><%- i %></a></li>
+									<% end %>
+								</ul>
+							</div>
 							<label>月</label>
 						</div>
 					</div>
 					<div class="frequency-one-time">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">年月</label>
-							<div class="col-sm-9 form-inline">
-								<div class="input-group date">
-									<input type="text" class="form-control" value="">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</div>
+							<div class="input-append date" data-date="2017年09月" data-date-format="yyyy年mm月">
+								<input type="text" readonly="readonly" name="date">
+								<span class="add-on"><i class="icon-th"></i></span>
 							</div>
 						</div>
 					</div>

@@ -5,8 +5,7 @@ module App.GraphArea {
 		var h = $('.graph-area').height();
 		$('#LineChart').attr('width', w);
 		$('#LineChart').attr('height', h);
-		var ctx = document.getElementById("LineChart");
-		var myLineChart = new Chart($(ctx), {
+		var myLineChart = new Chart($('#LineChart'), {
 			//グラフの種類
 			type: 'line',
 			//データの設定
@@ -78,5 +77,30 @@ module App.GraphArea {
 				maintainAspectRatio: false,
 			}
 		});
+	}
+
+	export function Data2Graph(): void {
+		// 全計算期間の開始・終了年月をもとめる。
+		var from = new Date(3000, 12);
+		var to = new Date(1900, 1);
+		var fromValue = App.Utilities.GetDateValue(new Date(3000, 12));
+		var toValue = App.Utilities.GetDateValue(new Date(1900, 1));
+		App.Params.items.forEach((e) => {
+			if (App.Utilities.GetDateValue(e.term.from) < fromValue) {
+				fromValue = App.Utilities.GetDateValue(e.term.from);
+				from = e.term.from;
+			}
+			if (toValue < App.Utilities.GetDateValue(e.term.to)) {
+				toValue = App.Utilities.GetDateValue(e.term.to);
+				to = e.term.to;
+			}
+		});
+
+		// グラフの点の数（計算期間が何か月分か）をもとめる。
+		var numMonths = App.Utilities.GetNumMonths(from, to);
+
+		// 横軸のラベル
+
+		// グラフの点の数についてループ
 	}
 }
