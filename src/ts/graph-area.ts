@@ -1,11 +1,14 @@
 module App.GraphArea {
+
+	var lineChart: Chart = null;
+
 	export function SetupGraphArea(): void {
 		//折れ線グラフ
 		var w = $('.graph-area').width();
 		var h = $('.graph-area').height();
 		$('#LineChart').attr('width', w);
 		$('#LineChart').attr('height', h);
-		var myLineChart = new Chart($('#LineChart'), {
+		lineChart = new Chart($('#LineChart'), {
 			//グラフの種類
 			type: 'line',
 			//データの設定
@@ -62,17 +65,6 @@ module App.GraphArea {
 			},
 			//オプションの設定
 			options: {
-				// scales: {
-				// 	Axes: [{
-				// 		stacked: true,
-				// 		ticks: {
-				// 			userCallback: (value, index, values) => {
-				// 				value = value.toString().split(/(?=(?:...)*$)/).join(',');
-				// 				return value;
-				// 			}
-				// 		}
-				// 	}]
-				// },
 				responsive: true,
 				maintainAspectRatio: false,
 			}
@@ -100,7 +92,63 @@ module App.GraphArea {
 		var numMonths = App.Utilities.GetNumMonths(from, to);
 
 		// 横軸のラベル
+		var d: Date = from;
+		lineChart.data.labels = new Array(numMonths);
+		for (var i = 0; i < numMonths; i++) {
+			if (d.getMonth() == 0) {
+				lineChart.data.labels[i] = '' + d.getFullYear();
+			}
+			else {
+				lineChart.data.labels[i] = '';
+			}
+			d = App.Utilities.GetNextMonth(d);
+		}
+
+
+		d = from;
+		var graphData: number[] = new Array(numMonths);
+		for (var i = 0; i < numMonths; i++) {
+			graphData[i] = 0;
+		}
+
+		// 各費用項目の増減分金額をストックしておくための配列。
+		var zogens: number[] = new Array(App.Params.items.length);
+		for (var j = 0; j < App.Params.items.length; j++) {
+			zogens[j] = 0;
+		}
 
 		// グラフの点の数についてループ
+		for (var i = 0; i < numMonths; i++) {
+
+			if (i == 0) {
+				graphData[i] = 0;
+			}
+			else {
+				// 前月の思い出
+				graphData[i] = graphData[i - 1];
+			}
+
+			// 各費用項目についてループ
+			for (var j = 0; j < App.Params.items.length; j++) {
+				// j番目の費用項目の金額を増減する場合
+				if (App.Utilities.ZogenThisMonth(App.Params.items[j], d)) {
+					zogens[j] += (App.Params.items[j].zogen.mode == App.Enums.FrequencyMode.Monthly ? App.Params.items[j].zogen.count : 1)
+						* App.Params.items[j].zogen.amount;
+				}
+
+				// j番目の費用項目を計上する場合
+				if (App.Utilities.CountableAmountThisMonth(App.Params.items[j], d)) {
+					var spendingIncome = (App.Params.items[j].spendingIncome ? -1 : 1);
+					graphData[i] += ((App.Params.items[j].frequency.mode == App.Enums.FrequencyMode.Monthly ? App.Params.items[j].frequency.count : 1)
+						* App.Params.items[j].frequency.amount)
+						+ zogens[j];
+				}
+			}
+
+			d = App.Utilities.GetNextMonth(d);
+		}
+
+		lineChart.data.datasets[0].data = graphData;
+		lineChart.update();
 	}
 }

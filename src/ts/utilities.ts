@@ -61,6 +61,29 @@ module App.Utilities {
 
 	// 2つの年月の間の月数（何カ月あるか）をもとめる。
 	export function GetNumMonths(dFrom: Date, dTo: Date): number {
-		return ((12 * (dTo.getFullYear() - dFrom.getFullYear())) + dTo.getMonth() - dFrom.getMonth());
+		return ((12 * (dTo.getFullYear() - dFrom.getFullYear())) + dTo.getMonth() - dFrom.getMonth() + 1);
+	}
+
+	export function GetNextMonth(d: Date): Date {
+		if (d.getMonth() == 11) {
+			return new Date(d.getFullYear() + 1, 0);
+		}
+		else {
+			return new Date(d.getFullYear(), d.getMonth() + 1);
+		}
+	}
+
+	// 費用項目の金額を指定した年月に計上するか判別する。
+	// true: 計上する。　false: 計上しない。
+	export function CountableAmountThisMonth(data: ItemData, month: Date): boolean {
+		// TODO
+		return true;
+	}
+
+	// 指定した年月に金額を増減するか判別する。
+	// true: 増減する。　false: 増減しない。
+	export function ZogenThisMonth(data: ItemData, month: Date): boolean {
+		// TODO
+		return true;
 	}
 }
