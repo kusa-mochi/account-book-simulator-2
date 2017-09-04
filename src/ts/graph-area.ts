@@ -93,16 +93,17 @@ module App.GraphArea {
 
 		// 横軸のラベル
 		var d: Date = from;
-		lineChart.data.labels = new Array(numMonths);
+		var graphLabels = new Array(numMonths);
 		for (var i = 0; i < numMonths; i++) {
-			if (d.getMonth() == 0) {
-				lineChart.data.labels[i] = '' + d.getFullYear();
+			if (d.getMonth() == 0 && d.getFullYear() % 10 == 0) {
+				graphLabels[i] = '' + d.getFullYear();
 			}
 			else {
-				lineChart.data.labels[i] = '';
+				graphLabels[i] = '';
 			}
 			d = App.Utilities.GetNextMonth(d);
 		}
+		lineChart.data.labels = graphLabels;
 
 
 		d = from;

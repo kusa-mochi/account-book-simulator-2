@@ -69,6 +69,9 @@ module App.ItemDetailArea {
 				// データを更新する。
 				App.Params.items[App.Params.selectedItemIndex].zogen.month = selectedMonth;
 			}
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 
 		// カレンダーコントロールの初期設定を行う。

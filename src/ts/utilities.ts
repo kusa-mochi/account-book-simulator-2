@@ -76,14 +76,54 @@ module App.Utilities {
 	// 費用項目の金額を指定した年月に計上するか判別する。
 	// true: 計上する。　false: 計上しない。
 	export function CountableAmountThisMonth(data: ItemData, month: Date): boolean {
-		// TODO
-		return true;
+		var output = false;
+
+		switch (data.frequency.mode) {
+			case App.Enums.FrequencyMode.Monthly:
+				output = true;
+				break;
+			case App.Enums.FrequencyMode.EveryYear:
+				if (data.frequency.month == month.getMonth()) {
+					output = true;
+				}
+				break;
+			case App.Enums.FrequencyMode.OneTime:
+				if (
+					(data.frequency.date.getFullYear() == month.getFullYear()) &&
+					(data.frequency.date.getMonth() == month.getMonth())
+				) {
+					output = true;
+				}
+				break;
+		}
+
+		return output;
 	}
 
 	// 指定した年月に金額を増減するか判別する。
 	// true: 増減する。　false: 増減しない。
 	export function ZogenThisMonth(data: ItemData, month: Date): boolean {
-		// TODO
-		return true;
+		var output = false;
+
+		switch (data.zogen.mode) {
+			case App.Enums.FrequencyMode.Monthly:
+				output = true;
+				break;
+			case App.Enums.FrequencyMode.EveryYear:
+				if (data.zogen.month == month.getMonth()) {
+					output = true;
+				}
+				break;
+			case App.Enums.FrequencyMode.OneTime:
+				if (
+					(data.zogen.date.getFullYear() == month.getFullYear()) &&
+					(data.zogen.date.getMonth() == month.getMonth())
+				) {
+					output = true;
+				}
+				break;
+		}
+
+		return output;
 	}
 }
