@@ -36,7 +36,8 @@ module App.Utilities {
 			);
 		}
 
-		// TODO: データをグラフに反映する。
+		// グラフを更新する。
+		App.GraphArea.Data2Graph();
 	}
 
 	export function GUIToData(): void {

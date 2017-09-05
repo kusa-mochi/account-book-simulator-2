@@ -80,6 +80,22 @@ module App.ItemDetailArea {
 			App.GraphArea.Data2Graph();
 		});
 
+		// 項目名が変更された場合の処理
+		$('.item-detail-area .item-name .form-control').keyup((e) => {
+			App.Params.items[App.Params.selectedItemIndex].name = $('.item-detail-area .item-name .form-control').text();
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		});
+
+		// 頻度：金額が変更された場合の処理
+		$('.item-detail-area .item-frequency .amount .form-control').keyup((e) => {
+			App.Params.items[App.Params.selectedItemIndex].frequency.amount = +$('.item-detail-area .item-frequency .amount .form-control').val();
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		});
+
 		// カレンダーコントロールの初期設定を行う。
 		SetupDatePickers();
 	}
