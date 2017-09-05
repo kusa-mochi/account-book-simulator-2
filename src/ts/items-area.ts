@@ -80,5 +80,15 @@ module App.ItemsArea {
 			// 金額の増減：金額
 			$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
 		});
+
+		$('.items-area').on('change', ':checkbox', function (e) {
+			// チェックボックスのチェックが更新された費用項目のインデックス
+			var itemIdx = App.Utilities.GetItemIndex($(e.target).parent().children('.item-button__label').text());
+
+			App.Params.items[itemIdx].selected = !App.Params.items[itemIdx].selected
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		});
 	}
 }

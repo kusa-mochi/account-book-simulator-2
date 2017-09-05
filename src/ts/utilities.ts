@@ -76,6 +76,14 @@ module App.Utilities {
 	// 費用項目の金額を指定した年月に計上するか判別する。
 	// true: 計上する。　false: 計上しない。
 	export function CountableAmountThisMonth(data: ItemData, month: Date): boolean {
+
+		if(
+			(GetDateValue(month) < GetDateValue(data.term.from)) ||
+			(GetDateValue(data.term.to) < GetDateValue(month))
+		) {
+			return false;
+		}
+
 		var output = false;
 
 		switch (data.frequency.mode) {
@@ -103,6 +111,14 @@ module App.Utilities {
 	// 指定した年月に金額を増減するか判別する。
 	// true: 増減する。　false: 増減しない。
 	export function ZogenThisMonth(data: ItemData, month: Date): boolean {
+
+		if(
+			(GetDateValue(month) < GetDateValue(data.term.from)) ||
+			(GetDateValue(data.term.to) < GetDateValue(month))
+		) {
+			return false;
+		}
+
 		var output = false;
 
 		switch (data.zogen.mode) {

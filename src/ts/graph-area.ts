@@ -131,6 +131,11 @@ module App.GraphArea {
 
 			// 各費用項目についてループ
 			for (var j = 0; j < App.Params.items.length; j++) {
+				// j番目の費用項目にチェックが入っていない場合
+				if (!App.Params.items[j].selected) {
+					continue;
+				}
+
 				// j番目の費用項目の金額を増減する場合
 				if (App.Utilities.ZogenThisMonth(App.Params.items[j], d)) {
 					zogens[j] += (App.Params.items[j].zogen.mode == App.Enums.FrequencyMode.Monthly ? App.Params.items[j].zogen.count : 1)
@@ -141,7 +146,7 @@ module App.GraphArea {
 				if (App.Utilities.CountableAmountThisMonth(App.Params.items[j], d)) {
 					var spendingIncome = (App.Params.items[j].spendingIncome ? -1 : 1);
 					graphData[i] += ((App.Params.items[j].frequency.mode == App.Enums.FrequencyMode.Monthly ? App.Params.items[j].frequency.count : 1)
-						* App.Params.items[j].frequency.amount)
+						* App.Params.items[j].frequency.amount * spendingIncome)
 						+ zogens[j];
 				}
 			}

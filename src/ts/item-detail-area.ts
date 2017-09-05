@@ -21,6 +21,9 @@ module App.ItemDetailArea {
 					= App.Enums.FrequencyMode.OneTime;
 					break;
 			}
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 
 		$('.item-detail-area .item-zogen input[type=radio][name=zogen]').change(function () {
@@ -41,6 +44,9 @@ module App.ItemDetailArea {
 					= App.Enums.FrequencyMode.OneTime;
 					break;
 			}
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 
 		$('.item-detail-area .frequency-count input[name=frequency-count]').bootstrapNumber({
@@ -91,6 +97,9 @@ module App.ItemDetailArea {
 			var month = selectedDate.getMonth();
 			// 頻度（一度だけ）の年月のデータを上書きする。
 			App.Params.items[App.Params.selectedItemIndex].frequency.date = new Date(year, month);
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 
 		$(".item-detail-area .item-zogen .frequency-one-time .input-append").datepicker({
@@ -105,6 +114,9 @@ module App.ItemDetailArea {
 			var month = selectedDate.getMonth();
 			// 増減（一度だけ）の年月のデータを上書きする。
 			App.Params.items[App.Params.selectedItemIndex].zogen.date = new Date(year, month);
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 
 		$(".item-detail-area .item-term .term-from .input-append").datepicker({
@@ -119,6 +131,9 @@ module App.ItemDetailArea {
 			var month = selectedDate.getMonth();
 			// 開始年月のデータを上書きする。
 			App.Params.items[App.Params.selectedItemIndex].term.from = new Date(year, month);
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 
 		$(".item-detail-area .item-term .term-to .input-append").datepicker({
@@ -133,6 +148,9 @@ module App.ItemDetailArea {
 			var month = selectedDate.getMonth();
 			// 終了年月のデータを上書きする。
 			App.Params.items[App.Params.selectedItemIndex].term.to = new Date(year, month);
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
 		});
 	}
 }

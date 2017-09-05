@@ -30,6 +30,7 @@ interface ZogenData {
 }
 
 interface ItemData {
+	selected: boolean,
 	name: string,
 	spendingIncome: boolean,	// true->spending, false->income
 	frequency: FrequencyData,
