@@ -11,76 +11,17 @@ module App.ItemsArea {
 
 		// 各費用項目ボタンがクリックされた場合の処理
 		$(document).on('click', '#main .main-body .items-area .item-button', (e) => {
-			// すべてのitem-buttonから，selectedクラスを除外する。
-			$('#main .main-body .items-area .item-button').removeClass('selected');
-
-			// クリックされたitem-buttonのみ，スタイルを変更する。
-			$(e.target).addClass('selected');
-
-			// TODO: 詳細表示領域に，費用項目の詳細情報を表示する。
+			// xボタンがクリックされていた場合
+			if ($(e.target).hasClass('glyphicon-remove')) {
+				OnItemRemoveButtonClick($(e.target));
+				return;
+			}
 			var itemName = $(e.target).children('.item-button__label').text();
 			App.Params.selectedItemIndex = App.Utilities.GetItemIndex(itemName);
-			var item = App.Params.items[App.Params.selectedItemIndex];
-
-			// 費用項目名
-			$('.item-detail-area .item-name input[name=item-name]').val(item.name);
-
-			// 支出／収入
-			$(item.spendingIncome ? 'input[name=spending-income]:nth(0)' : 'input[name=spending-income]:nth(1)').prop('checked', true);
-
-			// 頻度：「毎月・毎年・一度だけ」
-			switch (item.frequency.mode) {
-				case App.Enums.FrequencyMode.Monthly:
-					$('input[name=frequency]:nth(0)').prop('checked', true);
-					App.Utilities.ChangeFrequencyMode('frequency', true, false, false);
-					$('.item-detail-area .item-frequency .frequency-count input[name=frequency-count]').val(item.frequency.count);
-					break;
-				case App.Enums.FrequencyMode.EveryYear:
-					$('input[name=frequency]:nth(1)').prop('checked', true);
-					App.Utilities.ChangeFrequencyMode('frequency', false, true, false);
-					break;
-				case App.Enums.FrequencyMode.OneTime:
-					$('input[name=frequency]:nth(2)').prop('checked', true);
-					App.Utilities.ChangeFrequencyMode('frequency', false, false, true);
-					break;
-			}
-
-			// 頻度：金額
-			$('.item-detail-area .item-frequency .amount input[name=amount]').val(item.frequency.amount);
-
-			// 期間：開始
-			var dateFrom = App.Params.items[App.Params.selectedItemIndex].term.from;
-			$(".item-detail-area .item-term .term-from .input-append").datepicker(
-				'setDate', dateFrom.getFullYear() + '年' + (dateFrom.getMonth() + 1) + '月'
-			);
-
-			// 期間：終了
-			var dateTo: Date = App.Params.items[App.Params.selectedItemIndex].term.to;
-			$(".item-detail-area .item-term .term-to .input-append").datepicker(
-				'setDate', dateTo.getFullYear() + '年' + (dateTo.getMonth() + 1) + '月'
-			);
-
-			// 金額の増減：「毎月・毎年・一度だけ」
-			switch (item.zogen.mode) {
-				case App.Enums.FrequencyMode.Monthly:
-					$('input[name=zogen]:nth(0)').prop('checked', true);
-					App.Utilities.ChangeFrequencyMode('zogen', true, false, false);
-					$('.item-detail-area .item-zogen .frequency-count input[name=frequency-count]').val(item.zogen.count);
-					break;
-				case App.Enums.FrequencyMode.EveryYear:
-					$('input[name=zogen]:nth(1)').prop('checked', true);
-					App.Utilities.ChangeFrequencyMode('zogen', false, true, false);
-					break;
-				case App.Enums.FrequencyMode.OneTime:
-					$('input[name=zogen]:nth(2)').prop('checked', true);
-					App.Utilities.ChangeFrequencyMode('zogen', false, false, true);
-					break;
-			}
-
-			// 金額の増減：金額
-			$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
+			App.Utilities.ShowItemDetail(App.Params.selectedItemIndex);
 		});
 
+		// チェックボックスの状態が変化した場合の処理
 		$('.items-area').on('change', ':checkbox', function (e) {
 			// チェックボックスのチェックが更新された費用項目のインデックス
 			var itemIdx = App.Utilities.GetItemIndex($(e.target).parent().children('.item-button__label').text());
@@ -90,5 +31,52 @@ module App.ItemsArea {
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
 		});
+
+		// [+]ボタンが押されたときの処理
+		$('.main-body .items-area .item-button:last-child').on('click', (e) => {
+			// 追加する新たな費用項目データ
+			var newData: ItemData = {
+				selected: true,
+				name: '',
+				spendingIncome: true,	// spending
+				frequency: {
+					mode: App.Enums.FrequencyMode.Monthly,
+					count: 1,
+					month: 0,
+					date: new Date(),
+					amount: 0
+				},
+				term: {
+					from: new Date(Date.now),
+					to: new Date(Date.now)
+				},
+				zogen: {
+					mode: App.Enums.FrequencyMode.EveryYear,
+					count: 0,
+					month: 0,
+					date: new Date(),
+					amount: 0
+				}
+			}
+
+			// 新たな費用項目をデータの末尾に追加する。
+			App.Params.items.push(newData);
+
+			// データをGUIに反映する。
+			App.Utilities.DataToGUI();
+
+			// 詳細表示領域の項目名テキストボックスにフォーカスを移す。
+			$('.item-detail-area .item-name input[name=item-name]').focus();
+		});
+	}
+
+	// ×ボタンが押されたときの処理
+	function OnItemRemoveButtonClick(button: JQuery) {
+		var itemName = button.siblings('.item-button__label').text();
+		var itemIdx = App.Utilities.GetItemIndex(itemName);
+		App.Params.items.splice(itemIdx, 1);
+
+		// データをGUIに反映する。
+		App.Utilities.DataToGUI();
 	}
 }

@@ -117,9 +117,8 @@ module App.GraphArea {
 				// j番目の費用項目を計上する場合
 				if (App.Utilities.CountableAmountThisMonth(App.Params.items[j], d)) {
 					var spendingIncome = (App.Params.items[j].spendingIncome ? -1 : 1);
-					graphData[i] += ((App.Params.items[j].frequency.mode == App.Enums.FrequencyMode.Monthly ? App.Params.items[j].frequency.count : 1)
-						* App.Params.items[j].frequency.amount * spendingIncome)
-						+ zogens[j];
+					graphData[i] += (((App.Params.items[j].frequency.mode == App.Enums.FrequencyMode.Monthly ? App.Params.items[j].frequency.count : 1)
+						* App.Params.items[j].frequency.amount) + zogens[j]) * spendingIncome;
 				}
 			}
 

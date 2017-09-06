@@ -3,6 +3,23 @@ module App.ItemDetailArea {
 		$('.item-detail-area .frequency-every-year').css('display', 'none');
 		$('.item-detail-area .frequency-one-time').css('display', 'none');
 
+		// TODO：項目名が変更された場合の処理
+		$('.item-detail-area .item-name .form-control').keyup((e) => {
+			App.Params.items[App.Params.selectedItemIndex].name = $('.item-detail-area .item-name .form-control').text();
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		});
+
+		// 支出・収入の種別が変更された場合の処理
+		$('.item-detail-area input[type=radio][name=spending-income]').change(function () {
+			App.Params.items[App.Params.selectedItemIndex].spendingIncome = this.value == 'spending';
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		});
+
+		// 頻度：毎月・毎年・一度だけ　が変更された場合の処理
 		$('.item-detail-area .item-frequency input[type=radio][name=frequency]').change(function () {
 			switch (this.value) {
 				case 'monthly':
@@ -26,29 +43,7 @@ module App.ItemDetailArea {
 			App.GraphArea.Data2Graph();
 		});
 
-		$('.item-detail-area .item-zogen input[type=radio][name=zogen]').change(function () {
-			switch (this.value) {
-				case 'monthly':
-					App.Utilities.ChangeFrequencyMode('zogen', true, false, false);
-					App.Params.items[App.Params.selectedItemIndex].zogen.mode
-					= App.Enums.FrequencyMode.Monthly;
-					break;
-				case 'every-year':
-					App.Utilities.ChangeFrequencyMode('zogen', false, true, false);
-					App.Params.items[App.Params.selectedItemIndex].zogen.mode
-					= App.Enums.FrequencyMode.EveryYear;
-					break;
-				case 'one-time':
-					App.Utilities.ChangeFrequencyMode('zogen', false, false, true);
-					App.Params.items[App.Params.selectedItemIndex].zogen.mode
-					= App.Enums.FrequencyMode.OneTime;
-					break;
-			}
-
-			// グラフを更新する。
-			App.GraphArea.Data2Graph();
-		});
-
+		// 頻度・増減：回数のスピンコントロールの初期化処理
 		$('.item-detail-area .frequency-count input[name=frequency-count]').bootstrapNumber({
 			// default, danger, success , warning, info, primary
 			upClass: 'default',
@@ -56,7 +51,24 @@ module App.ItemDetailArea {
 			center: true
 		});
 
-		// 月を指定するコンボボックスが選択された場合の処理
+		// 頻度・増減：回数が変更された場合の処理
+		$('.item-detail-area .frequency-count .input-group').on('click', '.input-group-btn', (e) => {
+			var count = +$(e.target).closest('.input-group').children('.form-control').val();
+			var parent = $(e.target).closest('.panel-group').children('div');
+			if(parent.hasClass('item-frequency')) {	// 「頻度」の回数が更新された場合
+				// データを更新する。
+				App.Params.items[App.Params.selectedItemIndex].frequency.count = count;
+			}
+			else if(parent.hasClass('item-zogen')) {	// 「増減」の回数が更新された場合
+				// データを更新する。
+				App.Params.items[App.Params.selectedItemIndex].zogen.count = count;
+			}
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		})
+
+		// 頻度・増減：月を指定するコンボボックスが選択された場合の処理
 		$('.item-detail-area .frequency-every-year .frequency-month .dropdown-menu a').on('click', (e) => {
 			// 選択された月を取得する。
 			var selectedMonth: number = +$(e.target).text() - 1;	// Date構造体に対応するため，月-1 の値で変数を初期化する。
@@ -80,17 +92,43 @@ module App.ItemDetailArea {
 			App.GraphArea.Data2Graph();
 		});
 
-		// 項目名が変更された場合の処理
-		$('.item-detail-area .item-name .form-control').keyup((e) => {
-			App.Params.items[App.Params.selectedItemIndex].name = $('.item-detail-area .item-name .form-control').text();
+		// TODO：頻度・増減：年月が変更された場合の処理
+
+		// 頻度：金額が変更された場合の処理
+		$('.item-detail-area .item-frequency .amount .form-control').keyup((e) => {
+			App.Params.items[App.Params.selectedItemIndex].frequency.amount = +$('.item-detail-area .item-frequency .amount .form-control').val();
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
 		});
 
-		// 頻度：金額が変更された場合の処理
-		$('.item-detail-area .item-frequency .amount .form-control').keyup((e) => {
-			App.Params.items[App.Params.selectedItemIndex].frequency.amount = +$('.item-detail-area .item-frequency .amount .form-control').val();
+		// 増減：毎月・毎年・一度だけ　が変更された場合の処理
+		$('.item-detail-area .item-zogen input[type=radio][name=zogen]').change(function () {
+			switch (this.value) {
+				case 'monthly':
+					App.Utilities.ChangeFrequencyMode('zogen', true, false, false);
+					App.Params.items[App.Params.selectedItemIndex].zogen.mode
+					= App.Enums.FrequencyMode.Monthly;
+					break;
+				case 'every-year':
+					App.Utilities.ChangeFrequencyMode('zogen', false, true, false);
+					App.Params.items[App.Params.selectedItemIndex].zogen.mode
+					= App.Enums.FrequencyMode.EveryYear;
+					break;
+				case 'one-time':
+					App.Utilities.ChangeFrequencyMode('zogen', false, false, true);
+					App.Params.items[App.Params.selectedItemIndex].zogen.mode
+					= App.Enums.FrequencyMode.OneTime;
+					break;
+			}
+
+			// グラフを更新する。
+			App.GraphArea.Data2Graph();
+		});
+
+		// 増減：金額が変更された場合の処理
+		$('.item-detail-area .item-zogen .amount .form-control').keyup((e) => {
+			App.Params.items[App.Params.selectedItemIndex].zogen.amount = +$('.item-detail-area .item-zogen .amount .form-control').val();
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
