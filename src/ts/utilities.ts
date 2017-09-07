@@ -81,7 +81,7 @@ module App.Utilities {
 	// true: 計上する。　false: 計上しない。
 	export function CountableAmountThisMonth(data: ItemData, month: Date): boolean {
 
-		if(
+		if (
 			(GetDateValue(month) < GetDateValue(data.term.from)) ||
 			(GetDateValue(data.term.to) < GetDateValue(month))
 		) {
@@ -116,7 +116,7 @@ module App.Utilities {
 	// true: 増減する。　false: 増減しない。
 	export function ZogenThisMonth(data: ItemData, month: Date): boolean {
 
-		if(
+		if (
 			(GetDateValue(month) < GetDateValue(data.term.from)) ||
 			(GetDateValue(data.term.to) < GetDateValue(month))
 		) {
@@ -151,9 +151,9 @@ module App.Utilities {
 	export function ShowItemDetail(itemIdx: number): void {
 		// クリックされたitem-buttonのみ，スタイルを変更する。
 		$('#main .main-body .items-area .item-button:nth(' + itemIdx + ')')
-		.addClass('selected')
-		.siblings()
-		.removeClass('selected');
+			.addClass('selected')
+			.siblings()
+			.removeClass('selected');
 
 		var item = App.Params.items[itemIdx];
 
@@ -214,5 +214,26 @@ module App.Utilities {
 
 		// 金額の増減：金額
 		$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
+	}
+
+	export function IsIncludedInItems(itemName: string): boolean {
+		var output = false;
+		App.Params.items.forEach((e) => {
+			if (e.name == itemName) {
+				output = true;
+				return;
+			}
+		});
+
+		return output;
+	}
+
+	export function PushItem(data: ItemData): void {
+		// 既に費用項目が存在する場合
+		while (IsIncludedInItems(data.name)) {
+			data.name = data.name + '(1)';
+		}
+
+		App.Params.items.push(data);
 	}
 }

@@ -2,7 +2,7 @@ module App.Params {
 	export var items: ItemData[] = new Array();
 	export var selectedItemIndex = -1;
 	export function SetupNewData() {
-		items.push({
+		App.Utilities.PushItem({
 			selected: true,
 			name: '給与',
 			spendingIncome: false,	// income
@@ -25,7 +25,7 @@ module App.Params {
 				amount: 4000
 			}
 		});
-		items.push({
+		App.Utilities.PushItem({
 			selected: true,
 			name: '住宅ローン',
 			spendingIncome: true,	// spending
@@ -48,7 +48,7 @@ module App.Params {
 				amount: 0
 			}
 		});
-		items.push({
+		App.Utilities.PushItem({
 			selected: true,
 			name: '賞与（夏）',
 			spendingIncome: false,	// income

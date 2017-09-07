@@ -10,7 +10,7 @@ module App.ItemsArea {
 		$('#main .main-body .items-area.sortable').disableSelection();
 
 		// 各費用項目ボタンがクリックされた場合の処理
-		$(document).on('click', '#main .main-body .items-area .item-button', (e) => {
+		$(document).on('click', '#main .main-body .items-area .item-button:not(.sortable-cancel)', (e) => {
 			// xボタンがクリックされていた場合
 			if ($(e.target).hasClass('glyphicon-remove')) {
 				OnItemRemoveButtonClick($(e.target));
@@ -37,7 +37,7 @@ module App.ItemsArea {
 			// 追加する新たな費用項目データ
 			var newData: ItemData = {
 				selected: true,
-				name: '',
+				name: '新しい項目',
 				spendingIncome: true,	// spending
 				frequency: {
 					mode: App.Enums.FrequencyMode.Monthly,
@@ -60,7 +60,7 @@ module App.ItemsArea {
 			}
 
 			// 新たな費用項目をデータの末尾に追加する。
-			App.Params.items.push(newData);
+			App.Utilities.PushItem(newData);
 
 			// データをGUIに反映する。
 			App.Utilities.DataToGUI();

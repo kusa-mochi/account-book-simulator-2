@@ -3,12 +3,11 @@ module App.ItemDetailArea {
 		$('.item-detail-area .frequency-every-year').css('display', 'none');
 		$('.item-detail-area .frequency-one-time').css('display', 'none');
 
-		// TODO：項目名が変更された場合の処理
+		// 項目名が変更された場合の処理
 		$('.item-detail-area .item-name .form-control').keyup((e) => {
-			App.Params.items[App.Params.selectedItemIndex].name = $('.item-detail-area .item-name .form-control').text();
+			App.Params.items[App.Params.selectedItemIndex].name = '' + $('.item-detail-area .item-name .form-control').val();
 
-			// グラフを更新する。
-			App.GraphArea.Data2Graph();
+			App.Utilities.DataToGUI();
 		});
 
 		// 支出・収入の種別が変更された場合の処理
