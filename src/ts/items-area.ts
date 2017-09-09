@@ -67,11 +67,20 @@ module App.ItemsArea {
 			// データをGUIに反映する。
 			App.Utilities.DataToGUI();
 
+			App.ItemsArea.SelectItem(App.Params.items.length - 1);
+
 			App.FileManager.UpdateDownloadData();
 
 			// 詳細表示領域の項目名テキストボックスにフォーカスを移す。
 			$('.item-detail-area .item-name input[name=item-name]').focus();
 		});
+	}
+
+	// i番目の費用項目を選択する処理
+	export function SelectItem(i: number): void {
+		var evt = document.createEvent('MouseEvents');
+		evt.initEvent('click', true, false);
+		$('.items-area .item-button:nth(' + i + ')')[0].dispatchEvent(evt);
 	}
 
 	// ×ボタンが押されたときの処理
@@ -82,6 +91,11 @@ module App.ItemsArea {
 
 		// データをGUIに反映する。
 		App.Utilities.DataToGUI();
+
+		// 費用項目のボタンを1つ選択状態にする。
+		if (App.Params.items.length > 0) {
+			App.ItemsArea.SelectItem(itemIdx < App.Params.items.length ? itemIdx : (itemIdx - 1));
+		}
 
 		App.FileManager.UpdateDownloadData();
 	}

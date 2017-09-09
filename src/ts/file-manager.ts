@@ -54,6 +54,7 @@ module App.FileManager {
 			// alert(formatted);
 
 			App.Utilities.DataToGUI();
+			App.ItemsArea.SelectItem(0);
 			App.FileManager.UpdateDownloadData();
 		};
 

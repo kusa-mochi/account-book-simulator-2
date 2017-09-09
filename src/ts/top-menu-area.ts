@@ -14,6 +14,8 @@ module App.TopMenuArea {
 			// 新規作成の準備
 			App.Utilities.DataToGUI();
 
+			App.ItemsArea.SelectItem(0);
+
 			App.FileManager.UpdateDownloadData();
 		});
 
