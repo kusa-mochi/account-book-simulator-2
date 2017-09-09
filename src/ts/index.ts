@@ -11,7 +11,7 @@
 module App.Main {
 	$(document).ready(() => {
 		if (!App.Utilities.ValidateApp()) {
-			alert('このWebブラウザはHTML5に準拠していないため，本アプリケーションをご利用になれません。アプリケーションを終了します。');
+			alert('このWebブラウザはHTML5のFile APIに対応していないため，本アプリケーションをご利用になれません。アプリケーションを終了します。');
 			return;
 		}
 

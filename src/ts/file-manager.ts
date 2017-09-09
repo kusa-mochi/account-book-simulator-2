@@ -3,7 +3,6 @@ module App.FileManager {
 		return (
 			window.File != null &&
 			window.FileReader != null &&
-			window.FileList != null &&
 			window.Blob != null
 		);
 	}
