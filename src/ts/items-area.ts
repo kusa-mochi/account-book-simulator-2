@@ -30,6 +30,8 @@ module App.ItemsArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// [+]ボタンが押されたときの処理
@@ -47,8 +49,8 @@ module App.ItemsArea {
 					amount: 0
 				},
 				term: {
-					from: new Date(Date.now),
-					to: new Date(Date.now)
+					from: new Date(Date.now()),
+					to: new Date(Date.now())
 				},
 				zogen: {
 					mode: App.Enums.FrequencyMode.EveryYear,
@@ -65,6 +67,8 @@ module App.ItemsArea {
 			// データをGUIに反映する。
 			App.Utilities.DataToGUI();
 
+			App.FileManager.UpdateDownloadData();
+
 			// 詳細表示領域の項目名テキストボックスにフォーカスを移す。
 			$('.item-detail-area .item-name input[name=item-name]').focus();
 		});
@@ -78,5 +82,7 @@ module App.ItemsArea {
 
 		// データをGUIに反映する。
 		App.Utilities.DataToGUI();
+
+		App.FileManager.UpdateDownloadData();
 	}
 }

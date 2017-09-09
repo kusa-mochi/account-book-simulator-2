@@ -1,6 +1,7 @@
 module App.Params {
 	export var items: ItemData[] = new Array();
 	export var selectedItemIndex = -1;
+	export var currentFilePath = null;
 	export function SetupNewData() {
 		App.Utilities.PushItem({
 			selected: true,
@@ -73,5 +74,6 @@ module App.Params {
 		});
 
 		selectedItemIndex = 0;
+		currentFilePath = undefined;
 	}
 }

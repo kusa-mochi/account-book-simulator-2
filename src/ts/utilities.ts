@@ -1,4 +1,14 @@
 module App.Utilities {
+	export function ValidateApp(): boolean {
+		if (
+			!App.FileManager.FileAPISupported()
+		) {
+			return false;
+		}
+
+		return true;
+	}
+
 	export function GetItemIndex(itemName: string): number {
 		for (var i = 0; i < App.Params.items.length; i++) {
 			if (App.Params.items[i].name == itemName) {
@@ -22,6 +32,13 @@ module App.Utilities {
 
 		ResetGUI();
 
+		// 費用項目データが1件も無い場合
+		if (App.Params.items.length == 0) {
+			App.ItemDetailArea.HideItemDetailArea();
+		} else {
+			App.ItemDetailArea.DisplayItemDetailArea();
+		}
+
 		// データを費用項目一覧に反映する。
 		for (var i = App.Params.items.length - 1; i >= 0; i--) {
 			$('#main .items-area').prepend(
@@ -41,10 +58,6 @@ module App.Utilities {
 
 		// グラフを更新する。
 		App.GraphArea.Data2Graph();
-	}
-
-	export function GUIToData(): void {
-
 	}
 
 	// 費用項目詳細情報表示領域の，頻度情報に応じて，設定項目を切り替える処理。

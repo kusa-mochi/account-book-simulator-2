@@ -43,7 +43,19 @@ module App.GraphArea {
 		});
 	}
 
+	export function ResetGraph(): void {
+		lineChart.data.labels = [''];
+		lineChart.data.datasets[0].data = [0];
+		lineChart.update();
+	}
+
 	export function Data2Graph(): void {
+		// 費用項目データが1件も無い場合
+		if (App.Params.items.length == 0) {
+			ResetGraph();
+			return;
+		}
+
 		// 全計算期間の開始・終了年月をもとめる。
 		var from = new Date(3000, 12);
 		var to = new Date(1900, 1);

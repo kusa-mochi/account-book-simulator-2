@@ -37,3 +37,9 @@ interface ItemData {
 	term: TermData,
 	zogen: ZogenData
 }
+
+interface Window {
+	File,
+	FileReader,
+	FileList
+}

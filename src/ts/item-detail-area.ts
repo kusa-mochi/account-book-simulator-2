@@ -8,6 +8,7 @@ module App.ItemDetailArea {
 			App.Params.items[App.Params.selectedItemIndex].name = '' + $('.item-detail-area .item-name .form-control').val();
 
 			App.Utilities.DataToGUI();
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// 支出・収入の種別が変更された場合の処理
@@ -16,6 +17,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// 頻度：毎月・毎年・一度だけ　が変更された場合の処理
@@ -40,10 +43,12 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// 頻度・増減：回数のスピンコントロールの初期化処理
-		$('.item-detail-area .frequency-count input[name=frequency-count]').bootstrapNumber({
+		$('.item-detail-area .frequency-count input').bootstrapNumber({
 			// default, danger, success , warning, info, primary
 			upClass: 'default',
 			downClass: 'default',
@@ -53,7 +58,7 @@ module App.ItemDetailArea {
 		// 頻度・増減：回数が変更された場合の処理
 		$('.item-detail-area .frequency-count .input-group').on('click', '.input-group-btn', (e) => {
 			var count = +$(e.target).closest('.input-group').children('.form-control').val();
-			var parent = $(e.target).closest('.panel-group').children('div');
+			var parent = $(e.target).closest('.panel.panel-default');
 			if(parent.hasClass('item-frequency')) {	// 「頻度」の回数が更新された場合
 				// データを更新する。
 				App.Params.items[App.Params.selectedItemIndex].frequency.count = count;
@@ -65,6 +70,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		})
 
 		// 頻度・増減：月を指定するコンボボックスが選択された場合の処理
@@ -89,9 +96,9 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
-		});
 
-		// TODO：頻度・増減：年月が変更された場合の処理
+			App.FileManager.UpdateDownloadData();
+		});
 
 		// 頻度：金額が変更された場合の処理
 		$('.item-detail-area .item-frequency .amount .form-control').keyup((e) => {
@@ -99,6 +106,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// 増減：毎月・毎年・一度だけ　が変更された場合の処理
@@ -123,6 +132,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// 増減：金額が変更された場合の処理
@@ -131,6 +142,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		// カレンダーコントロールの初期設定を行う。
@@ -153,6 +166,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		$(".item-detail-area .item-zogen .frequency-one-time .input-append").datepicker({
@@ -170,6 +185,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		$(".item-detail-area .item-term .term-from .input-append").datepicker({
@@ -187,6 +204,8 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
 
 		$(".item-detail-area .item-term .term-to .input-append").datepicker({
@@ -204,6 +223,16 @@ module App.ItemDetailArea {
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
+
+			App.FileManager.UpdateDownloadData();
 		});
+	}
+
+	export function HideItemDetailArea(): void {
+		$('.item-detail-area').css('display', 'none');
+	}
+
+	export function DisplayItemDetailArea(): void {
+		$('.item-detail-area').css('display', 'block');
 	}
 }
