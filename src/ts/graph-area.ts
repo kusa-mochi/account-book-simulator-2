@@ -39,6 +39,13 @@ module App.GraphArea {
 			options: {
 				responsive: true,
 				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							userCallback: NumberThousandsSeparator
+						}
+					}]
+				}
 			}
 		});
 	}
@@ -139,5 +146,9 @@ module App.GraphArea {
 
 		lineChart.data.datasets[0].data = graphData;
 		lineChart.update();
+	}
+
+	function NumberThousandsSeparator(value: number, index: number, values: any) {
+		return value.toString().split(/(?=(?:...)*$)/).join(',');
 	}
 }
