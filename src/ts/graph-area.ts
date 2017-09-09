@@ -40,6 +40,13 @@ module App.GraphArea {
 				responsive: true,
 				maintainAspectRatio: false,
 				scales: {
+					xAxes: [{
+						ticks: {
+							autoSkip: true,
+							// userCallback: SkipIfNull,
+							// stepSize: 120
+						}
+					}],
 					yAxes: [{
 						ticks: {
 							userCallback: NumberThousandsSeparator
@@ -86,12 +93,13 @@ module App.GraphArea {
 		var d: Date = from;
 		var graphLabels = new Array(numMonths);
 		for (var i = 0; i < numMonths; i++) {
-			if (d.getMonth() == 0 && d.getFullYear() % 10 == 0) {
-				graphLabels[i] = '' + d.getFullYear();
-			}
-			else {
-				graphLabels[i] = '';
-			}
+			// if (d.getMonth() == 0 && d.getFullYear() % 10 == 0) {
+			// 	graphLabels[i] = '' + d.getFullYear();
+			// }
+			// else {
+			// 	graphLabels[i] = null;
+			// }
+			graphLabels[i] = '' + d.getFullYear() + '/' + (d.getMonth() + 1);
 			d = App.Utilities.GetNextMonth(d);
 		}
 		lineChart.data.labels = graphLabels;
@@ -146,6 +154,10 @@ module App.GraphArea {
 
 		lineChart.data.datasets[0].data = graphData;
 		lineChart.update();
+	}
+
+	function SkipIfNull(value: any, index: number, values: any) {
+		return (value == null) ? '' : value;
 	}
 
 	function NumberThousandsSeparator(value: number, index: number, values: any) {
