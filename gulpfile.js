@@ -5,6 +5,8 @@ var outputFileName = "account-book-simulator-2.js";
 var outputDirName = "./output";
 var debugDirName = "./output/debug";
 var releaseDirName = "./output/release";
+var electronObjDirName = "./obj/electron";
+var electronDirName = "./output/electron";
 var objDirName = "./obj";
 var outputHTMLFileName = "_Layout.html"
 var gulp = require('gulp');
@@ -247,4 +249,32 @@ gulp.task('rebuild_all', function () {
 		['copy_debug', 'ect', 'sass', 'ts'],
 		['copy_release', 'minify-html', 'minify-css', 'minify-js']
 	);
+});
+
+
+
+var packager = require('electron-packager');
+gulp.task('electron', function () {
+
+	// releaseフォルダからelectron用の一時フォルダにファイルをコピーする。
+	gulp.src([
+		path.join(releaseDirName, '**/*'),
+		path.join(sourceDirName, 'electron/*')
+	]).pipe(
+		gulp.dest(electronObjDirName)
+	);
+
+	// electronパッケージを生成する。
+	packager({
+		dir: electronObjDirName,
+		out: electronDirName,
+		name: 'LifeMochiSimulator',
+		arch: 'x64',
+		platform: 'win32',
+		electronVersion: '1.7.6',
+		overwrite: true
+	}, function (err, path) {
+		if (err) console.log(err);
+		console.log("Done: " + path);
+	});
 });
