@@ -1,4 +1,11 @@
+<% if @buildMode == 'web' : %>
 <script src="./js/jquery.min.js"></script>
+<% end %>
+<% if @buildMode == 'electron' : %>
+<script>
+window.jQuery = window.$ = require('./js/jquery.min.js');
+</script>
+<% end %>
 <script src="./js/jquery-ui.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/bootstrap-datepicker.min.js"></script>

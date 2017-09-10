@@ -13,6 +13,27 @@ var gulp = require('gulp');
 var path = require('path');
 var plumber = require('gulp-plumber');  // error handling
 var runSequence = require('run-sequence');
+var jsLibraries = [
+	'./node_modules/jquery/dist/jquery.min.js',
+	'./node_modules/bootstrap/dist/js/bootstrap.min.js',
+	'./node_modules/jquery-ui-dist/jquery-ui.min.js',
+	'./node_modules/chart.js/dist/Chart.bundle.min.js',
+	'./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+	'./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js',
+	path.join(sourceDirName, 'lib/bootstrap-number-input/bootstrap-number-input.js')
+];
+var cssLibraries = [
+	'./node_modules/bootstrap/dist/css/bootstrap.min.css',
+	'./node_modules/jquery-ui-dist/jquery-ui.min.css',
+	'./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
+];
+var fontLibraries = [
+	'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+	'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+	'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+	'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
+	'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
+];
 
 
 
@@ -37,71 +58,62 @@ gulp.task('clean_release', function () {
 
 
 
-gulp.task('copy_debug', function () {
+gulp.task('copy_debug_js', function () {
 	// copy library js files to output folder.
-	gulp.src([
-		'./node_modules/jquery/dist/jquery.min.js',
-		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.js',
-		'./node_modules/chart.js/dist/Chart.bundle.min.js',
-		'./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
-		'./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js',
-		path.join(sourceDirName, 'lib/bootstrap-number-input/bootstrap-number-input.js')
-	]).pipe(gulp.dest(path.join(debugDirName, 'js')));
-
+	return gulp.src(jsLibraries)
+	.pipe(gulp.dest(path.join(debugDirName, 'js')));
+});
+gulp.task('copy_debug_css', function () {
 	// copy library css files to output folder.
-	gulp.src([
-		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.css',
-		'./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
-	]).pipe(gulp.dest(path.join(debugDirName, 'css')));
-
+	return gulp.src(cssLibraries)
+	.pipe(gulp.dest(path.join(debugDirName, 'css')));
+});
+gulp.task('copy_debug_images', function () {
 	// copy image files without sprite.
-	gulp.src([
+	return gulp.src([
 		path.join(sourceDirName, 'images/*'),
 		'!./src/images/sprite/**/*'
 	]).pipe(gulp.dest(path.join(debugDirName, 'images')));
-
+});
+gulp.task('copy_debug_fonts', function () {
 	// copy font files to output folder.
-	gulp.src([
-		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
-		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
-		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
-		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
-		'./node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
-	]).pipe(gulp.dest(path.join(debugDirName, 'fonts')));
+	return gulp.src(fontLibraries)
+	.pipe(gulp.dest(path.join(debugDirName, 'fonts')));
+});
+gulp.task('copy_debug', function () {
+	return runSequence(
+		['copy_debug_js', 'copy_debug_css', 'copy_debug_images', 'copy_debug_fonts']
+	);
 });
 
 
 
-gulp.task('copy_release', function () {
+gulp.task('copy_release_js', function () {
 	// copy library js files to output folder.
-	gulp.src([
-		'./node_modules/jquery/dist/jquery.min.js',
-		'./node_modules/bootstrap/dist/js/bootstrap.min.js',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.js',
-		'./node_modules/chart.js/dist/Chart.bundle.min.js',
-		'./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
-		'./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js',
-		path.join(sourceDirName, 'lib/bootstrap-number-input/bootstrap-number-input.js')
-	]).pipe(gulp.dest(path.join(releaseDirName, 'js')));
-
+	return gulp.src(jsLibraries)
+	.pipe(gulp.dest(path.join(releaseDirName, 'js')));
+});
+gulp.task('copy_release_css', function () {
 	// copy library css files to output folder.
-	gulp.src([
-		'./node_modules/bootstrap/dist/css/bootstrap.min.css',
-		'./node_modules/jquery-ui-dist/jquery-ui.min.css',
-		'./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
-	]).pipe(gulp.dest(path.join(releaseDirName, 'css')));
-
+	return gulp.src(cssLibraries)
+	.pipe(gulp.dest(path.join(releaseDirName, 'css')));
+});
+gulp.task('copy_release_images', function () {
 	// copy image files without sprite.
-	gulp.src([
+	return gulp.src([
 		path.join(debugDirName, 'images/**/*')
 	]).pipe(gulp.dest(path.join(releaseDirName, 'images')));
-
+});
+gulp.task('copy_release_fonts', function () {
 	// copy font files to output folder.
-	gulp.src([
+	return gulp.src([
 		'./node_modules/bootstrap/dist/fonts/*'
 	]).pipe(gulp.dest(path.join(releaseDirName, 'fonts')));
+});
+gulp.task('copy_release', function () {
+	return runSequence(
+		['copy_release_js', 'copy_release_css', 'copy_release_images', 'copy_release_fonts']
+	);
 });
 
 
@@ -113,8 +125,34 @@ gulp.task('ect', function () {
 		'!./node_modules/**',   // except files below node_modules folder
 		'!./**/_*.html'			// except specific name HTML files
 	]).pipe(plumber())
-		.pipe(ect({ ext: '.html' }))
-		.pipe(gulp.dest(debugDirName));
+	.pipe(ect(
+		{
+			ext: '.html',
+			data: {
+				buildMode: 'electron'
+			}
+		}
+	))
+	.pipe(gulp.dest(debugDirName));
+});
+
+
+
+gulp.task('ect-electron', function () {
+	return gulp.src([
+		path.join(sourceDirName, 'views/**/*.html'),
+		'!./node_modules/**',   // except files below node_modules folder
+		'!./**/_*.html'			// except specific name HTML files
+	]).pipe(plumber())
+	.pipe(ect(
+		{
+			ext: '.html',
+			data: {
+				buildMode: 'electron'
+			}
+		}
+	))
+	.pipe(gulp.dest(debugDirName));
 });
 
 
@@ -129,23 +167,51 @@ gulp.task('minify-html', function () {
 
 
 var spritesmith = require('gulp.spritesmith');
-gulp.task('sprite', function () {
-	let spriteData = gulp.src('./src/images/sprite/*.png')
-		.pipe(spritesmith({
-			imgName: 'sprite.png',                        // スプライト画像
-			cssName: '_sprite.scss',                      // 生成される CSS テンプレート
-			imgPath: '../images/sprite.png', // 生成される CSS テンプレートに記載されるスプライト画像パス
-			cssFormat: 'css',                            // フォーマット拡張子
-			cssOpts: {
-				cssSelector: function (sprite) {
-					return '.' + sprite.name;
-				}
+var spriteData;
+gulp.task('make_sprite_image', function() {
+	spriteData = gulp.src('./src/images/sprite/*.png')
+	.pipe(spritesmith({
+		imgName: 'sprite.png',                        // スプライト画像
+		cssName: '_sprite.scss',                      // 生成される CSS テンプレート
+		imgPath: '../images/sprite.png', // 生成される CSS テンプレートに記載されるスプライト画像パス
+		cssFormat: 'css',                            // フォーマット拡張子
+		cssOpts: {
+			cssSelector: function (sprite) {
+				return '.' + sprite.name;
 			}
-		}));
-	spriteData.img
-		.pipe(gulp.dest(path.join(debugDirName, 'images')));     // imgName で指定したスプライト画像の保存先
+		}
+	}));
+});
+gulp.task('sprite_images', function() {
+	return spriteData.img
+	.pipe(gulp.dest(path.join(debugDirName, 'images')));     // imgName で指定したスプライト画像の保存先
+});
+gulp.task('sprite_css', function() {
 	return spriteData.css
-		.pipe(gulp.dest('./obj'));       // cssName で指定した CSS テンプレートの保存先
+	.pipe(gulp.dest('./obj'));       // cssName で指定した CSS テンプレートの保存先
+});
+gulp.task('sprite', function () {
+	return runSequence(
+		'make_sprite_image',
+		'sprite_images',
+		'sprite_css'
+	);
+	// let spriteData = gulp.src('./src/images/sprite/*.png')
+	// 	.pipe(spritesmith({
+	// 		imgName: 'sprite.png',                        // スプライト画像
+	// 		cssName: '_sprite.scss',                      // 生成される CSS テンプレート
+	// 		imgPath: '../images/sprite.png', // 生成される CSS テンプレートに記載されるスプライト画像パス
+	// 		cssFormat: 'css',                            // フォーマット拡張子
+	// 		cssOpts: {
+	// 			cssSelector: function (sprite) {
+	// 				return '.' + sprite.name;
+	// 			}
+	// 		}
+	// 	}));
+	// spriteData.img
+	// 	.pipe(gulp.dest(path.join(debugDirName, 'images')));     // imgName で指定したスプライト画像の保存先
+	// return spriteData.css
+	// 	.pipe(gulp.dest('./obj'));       // cssName で指定した CSS テンプレートの保存先
 });
 
 
@@ -220,20 +286,48 @@ gulp.task('test', function () {
 
 
 
+var packager = require('electron-packager');
+gulp.task('electron', function () {
+
+	// releaseフォルダからelectron用の一時フォルダにファイルをコピーする。
+	return gulp.src([
+		path.join(releaseDirName, '**/*'),
+		path.join(sourceDirName, 'electron/*')
+	]).pipe(
+		gulp.dest(electronObjDirName)
+	).on('end', function () {
+		// electronパッケージを生成する。
+		packager({
+			dir: electronObjDirName,
+			out: electronDirName,
+			name: 'LifeMochiSimulator',
+			arch: 'x64',
+			platform: 'win32',
+			electronVersion: '1.7.6',
+			overwrite: true
+		}, function (err, path) {
+			if (err) console.log(err);
+			console.log("Done: " + path);
+		});
+	});
+});
+
+
+
 gulp.task('rebuild_debug', function () {
-	runSequence(
+	return runSequence(
 		'clean_debug',
 		//'tslint',
-		'sprite',
-		['copy_debug', 'ect', 'sass', 'ts'],
-		'test'
+		//'sprite',
+		['copy_debug', 'ect', 'sass', 'ts']
+		// 'test'
 	);
 });
 
 
 
 gulp.task('rebuild_release', function () {
-	runSequence(
+	return runSequence(
 		'clean_release',
 		['copy_release', 'minify-html', 'minify-css', 'minify-js']
 	);
@@ -241,40 +335,21 @@ gulp.task('rebuild_release', function () {
 
 
 
-gulp.task('rebuild_all', function () {
-	runSequence(
-		'clean_all',
-		'tslint',
-		'sprite',
-		['copy_debug', 'ect', 'sass', 'ts'],
-		['copy_release', 'minify-html', 'minify-css', 'minify-js']
+gulp.task('rebuild_electron', function () {
+	return runSequence(
+		'clean_debug',
+		['copy_debug', 'ect-electron', 'sass', 'ts']
 	);
 });
 
 
 
-var packager = require('electron-packager');
-gulp.task('electron', function () {
-
-	// releaseフォルダからelectron用の一時フォルダにファイルをコピーする。
-	gulp.src([
-		path.join(releaseDirName, '**/*'),
-		path.join(sourceDirName, 'electron/*')
-	]).pipe(
-		gulp.dest(electronObjDirName)
-	);
-
-	// electronパッケージを生成する。
-	packager({
-		dir: electronObjDirName,
-		out: electronDirName,
-		name: 'LifeMochiSimulator',
-		arch: 'x64',
-		platform: 'win32',
-		electronVersion: '1.7.6',
-		overwrite: true
-	}, function (err, path) {
-		if (err) console.log(err);
-		console.log("Done: " + path);
-	});
-});
+// gulp.task('rebuild_all', function () {
+// 	return runSequence(
+// 		'clean_all',
+// 		'tslint',
+// 		'sprite',
+// 		['copy_debug', 'ect', 'sass', 'ts'],
+// 		['copy_release', 'minify-html', 'minify-css', 'minify-js']
+// 	);
+// });

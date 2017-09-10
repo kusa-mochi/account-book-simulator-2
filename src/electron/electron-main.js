@@ -13,7 +13,7 @@ function createWindow() {
 	// // デバッグするためのDevToolsを表示
 	// win.webContents.openDevTools();
 	// ウィンドウを閉じたら参照を破棄
-	win.on('closed', () => {   // ()は　function ()と書いていい
+	win.on('closed', () => {
 		win = null;
 	});
 }
@@ -21,7 +21,7 @@ function createWindow() {
 app.on('ready', createWindow);
 // 全てのウィンドウを閉じたらアプリを終了
 app.on('window-all-closed', () => {
-	if (process.platform !== 'win32') {
+	if (process.platform != 'darwin') {
 		app.quit();
 	}
 });
