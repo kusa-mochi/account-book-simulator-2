@@ -3,7 +3,16 @@ module App.ItemsArea {
 		$('#main .main-body .items-area.sortable').sortable({
 			revert: 100,
 			stop: (event, ui) => {
-				// TOOD: データの並べ替えが終わった後に行う処理をここに書く。
+				// 費用項目の並べ替えが終わった後に行う処理
+
+				// データの配列も，表示に合わせて並べ替える。
+				var newDataArr: ItemData[] = new Array();
+				for (var iItem = 0; iItem < App.Params.items.length; iItem++) {
+					var itemName = $('.items-area .item-button:not(.sortable-cancel):nth(' + iItem + ') .item-button__label').text();
+					var id = App.Utilities.GetItemIndex(itemName);
+					newDataArr.push(App.Params.items[id]);
+				}
+				App.Params.items = newDataArr;
 			},
 			cancel: '.sortable-cancel'
 		});

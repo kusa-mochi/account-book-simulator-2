@@ -6,6 +6,37 @@
 	<label class="radio-inline active"><input checked type="radio" name="spending-income" value="spending">支出</label>
 	<label class="radio-inline"><input type="radio" name="spending-income" value="income">収入</label>
 	<div class="panel-group" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default item-term">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						期間
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body">
+					<div class="term-from">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">開始</label>
+							<div class="input-append date" data-date="2017年09月" data-date-format="yyyy年mm月">
+								<input type="text" readonly="readonly" name="date">
+								<span class="add-on"><i class="icon-th"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="term-to">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">終了</label>
+							<div class="input-append date" data-date="2017年09月" data-date-format="yyyy年mm月">
+								<input type="text" readonly="readonly" name="date">
+								<span class="add-on"><i class="icon-th"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-default item-frequency">
 			<div class="panel-heading" role="tab" id="headingOne">
 				<h4 class="panel-title">
@@ -52,37 +83,6 @@
 					<div class="amount">
 						<label>金額&nbsp;[円]</label>
 						<input type="text" name="amount" class="form-control">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="panel panel-default item-term">
-			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						期間
-					</a>
-				</h4>
-			</div>
-			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-				<div class="panel-body">
-					<div class="term-from">
-						<div class="form-group">
-							<label class="col-sm-3 control-label">開始</label>
-							<div class="input-append date" data-date="2017年09月" data-date-format="yyyy年mm月">
-								<input type="text" readonly="readonly" name="date">
-								<span class="add-on"><i class="icon-th"></i></span>
-							</div>
-						</div>
-					</div>
-					<div class="term-to">
-						<div class="form-group">
-							<label class="col-sm-3 control-label">終了</label>
-							<div class="input-append date" data-date="2017年09月" data-date-format="yyyy年mm月">
-								<input type="text" readonly="readonly" name="date">
-								<span class="add-on"><i class="icon-th"></i></span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

@@ -129,7 +129,7 @@ gulp.task('ect', function () {
 		{
 			ext: '.html',
 			data: {
-				buildMode: 'electron'
+				buildMode: 'web'
 			}
 		}
 	))
@@ -335,10 +335,19 @@ gulp.task('rebuild_release', function () {
 
 
 
-gulp.task('rebuild_electron', function () {
+gulp.task('rebuild_debug_electron', function () {
 	return runSequence(
 		'clean_debug',
 		['copy_debug', 'ect-electron', 'sass', 'ts']
+	);
+});
+
+
+
+gulp.task('rebuild_release_electron', function () {
+	return runSequence(
+		'clean_release',
+		['copy_release', 'minify-html', 'minify-css', 'minify-js']
 	);
 });
 
