@@ -1,5 +1,14 @@
 // to run tasks, do Ctrl+Shift+B
 
+// デバッグビルド
+// 'rebuild_debug'
+
+// Web版ビルド
+// 'rebuild_debug' -> 'rebuild_release'
+
+// オフライン版ビルド
+// 'rebuild_debug_electron' -> 'rebuild_release_electron' -> 'electron'
+
 var appVersion = "1.0.0";
 var sourceDirName = "./src";
 var outputFileName = "account-book-simulator-2.js";
