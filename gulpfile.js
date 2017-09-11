@@ -1,5 +1,6 @@
 // to run tasks, do Ctrl+Shift+B
 
+var appVersion = "1.0.0";
 var sourceDirName = "./src";
 var outputFileName = "account-book-simulator-2.js";
 var outputDirName = "./output";
@@ -129,7 +130,8 @@ gulp.task('ect', function () {
 		{
 			ext: '.html',
 			data: {
-				buildMode: 'web'
+				buildMode: 'web',
+				version: appVersion
 			}
 		}
 	))
@@ -148,7 +150,8 @@ gulp.task('ect-electron', function () {
 		{
 			ext: '.html',
 			data: {
-				buildMode: 'electron'
+				buildMode: 'electron',
+				version: appVersion
 			}
 		}
 	))

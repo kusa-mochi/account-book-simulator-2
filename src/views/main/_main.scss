@@ -29,6 +29,14 @@ $info_text_color: #444444;
 		margin: 0;
 		padding: 0;
 
+		.navbar {
+			.collapse {
+				.navbar-nav__modal-link {
+					outline: none;
+				}
+			}
+		}
+
 		.main-body {
 			position: relative;
 			width: 100%;
