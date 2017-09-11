@@ -20,6 +20,10 @@ module App.ItemsArea {
 
 		// 各費用項目ボタンがクリックされた場合の処理
 		$(document).on('click', '#main .main-body .items-area .item-button:not(.sortable-cancel)', (e) => {
+			// チェックボックスがクリックされていた場合
+			if($(e.target).hasClass('item-button__checkbox')) {
+				return;
+			}
 			// xボタンがクリックされていた場合
 			if ($(e.target).hasClass('glyphicon-remove')) {
 				OnItemRemoveButtonClick($(e.target));
@@ -33,7 +37,12 @@ module App.ItemsArea {
 		// チェックボックスの状態が変化した場合の処理
 		$('.items-area').on('change', ':checkbox', function (e) {
 			// チェックボックスのチェックが更新された費用項目のインデックス
-			var itemIdx = App.Utilities.GetItemIndex($(e.target).parent().children('.item-button__label').text());
+			var itemIdx = App.Utilities.GetItemIndex(
+				$(e.target)
+				.parent()
+				.children('.item-button__label')
+				.text()
+			);
 
 			App.Params.items[itemIdx].selected = !App.Params.items[itemIdx].selected
 
