@@ -1,30 +1,45 @@
 #top-menu {
 	position: absolute;
-	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 	width: 100%;
 	height: 100%;
 	background-color: $main_bg;
 	transition: opacity 0.2s ease-out;
 	opacity: 1;
 
-	.top-menu__buttons {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		width: 500px;
-		height: 200px;
+	.navbar {
+		margin: 0;
+		color: $info_text_color;
 
-		button {
-			width: 200px;
-			height: 200px;
+		.navbar-brand,
+		.navbar-nav {
+			color: $info_text_color;
 		}
+	}
 
-		input {
-			display: none;
+	.top-menu__buttons-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: calc(100% - 52px);
+
+		.top-menu__buttons {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			width: 500px;
+			height: 200px;
+
+			button {
+				width: 200px;
+				height: 200px;
+			}
+
+			input {
+				display: none;
+			}
 		}
 	}
 }

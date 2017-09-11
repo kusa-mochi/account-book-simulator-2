@@ -1,5 +1,5 @@
 {
-	"name": "life-mochi-simulator",
+	"name": "mochi-life-simulator",
 	"version": "1.0.0",
 	"description": "",
 	"main": "electron-main.js",

@@ -303,11 +303,12 @@ gulp.task('electron', function () {
 		packager({
 			dir: electronObjDirName,
 			out: electronDirName,
-			name: 'LifeMochiSimulator',
+			name: '生涯収支シミュレーター',
 			arch: 'x64',
 			platform: 'win32',
 			electronVersion: '1.7.6',
-			overwrite: true
+			overwrite: true,
+			asar: true
 		}, function (err, path) {
 			if (err) console.log(err);
 			console.log("Done: " + path);
@@ -353,15 +354,3 @@ gulp.task('rebuild_release_electron', function () {
 		['copy_release', 'minify-html', 'minify-css', 'minify-js']
 	);
 });
-
-
-
-// gulp.task('rebuild_all', function () {
-// 	return runSequence(
-// 		'clean_all',
-// 		'tslint',
-// 		'sprite',
-// 		['copy_debug', 'ect', 'sass', 'ts'],
-// 		['copy_release', 'minify-html', 'minify-css', 'minify-js']
-// 	);
-// });

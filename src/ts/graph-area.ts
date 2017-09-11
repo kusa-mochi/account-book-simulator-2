@@ -20,7 +20,7 @@ module App.GraphArea {
 				//データセット
 				datasets: [{
 					//凡例
-					label: "資産",
+					label: "累計収支",
 					fill: true,
 					lineTension: 0,
 					pointRadius: 2,
