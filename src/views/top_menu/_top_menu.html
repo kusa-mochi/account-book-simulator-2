@@ -5,8 +5,10 @@
 				<div class="navbar-brand">生涯収支シミュレーター</div>
 				<% if @buildMode == 'web' : %>
 				<ul class="nav navbar-nav">
-					<li><a href="./MochiLifeSimulator.zip">オフライン版（Windows 7/10 64bit）</a></li>
+					<li><a class="navbar-nav__modal-link" data-toggle="modal" data-target="#offline-download-modal">オフライン版（Windows 7/10 64bit）</a></li>
 				</ul>
+				<!-- ユーザーからは見えない。offline-download-modalのダウンロードボタンが押されたときに，JavaScriptコードからクリックイベントを発火させる。 -->
+				<a href="./MochiLifeSimulator.zip" class="offline-download-link"></a>
 				<% end %>
 			</div>
 		</div>

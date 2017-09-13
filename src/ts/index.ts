@@ -23,5 +23,6 @@ module App.Main {
 		App.ItemsArea.SetupItemButtons();
 		App.GraphArea.SetupGraphArea();
 		App.ItemDetailArea.SetupItemDetailArea();
+		App.OfflineDownloadMoal.SetupOfflineDownloadModal();
 	});
 }
