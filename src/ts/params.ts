@@ -12,11 +12,11 @@ module App.Params {
 				count: 1,
 				month: 0,
 				date: new Date(),
-				amount: 200000
+				amount: 220000
 			},
 			term: {
 				from: new Date(2017, 7),
-				to: new Date(2037, 2)
+				to: new Date(2042, 2)
 			},
 			zogen: {
 				mode: App.Enums.FrequencyMode.EveryYear,
@@ -28,41 +28,18 @@ module App.Params {
 		});
 		App.Utilities.PushItem({
 			selected: true,
-			name: '住宅ローン',
-			spendingIncome: true,	// spending
-			frequency: {
-				mode: App.Enums.FrequencyMode.Monthly,
-				count: 1,
-				month: 0,
-				date: new Date(),
-				amount: 90000
-			},
-			term: {
-				from: new Date(2017, 7),
-				to: new Date(2045, 2)
-			},
-			zogen: {
-				mode: App.Enums.FrequencyMode.OneTime,
-				count: 0,
-				month: 0,
-				date: new Date(2017, 8),
-				amount: 0
-			}
-		});
-		App.Utilities.PushItem({
-			selected: true,
-			name: '賞与（夏）',
+			name: 'ボーナス',
 			spendingIncome: false,	// income
 			frequency: {
 				mode: App.Enums.FrequencyMode.EveryYear,
 				count: 0,
 				month: 5,
 				date: new Date(),
-				amount: 600000
+				amount: 300000
 			},
 			term: {
 				from: new Date(2017, 7),
-				to: new Date(2037, 2)
+				to: new Date(2042, 2)
 			},
 			zogen: {
 				mode: App.Enums.FrequencyMode.EveryYear,
@@ -70,6 +47,29 @@ module App.Params {
 				month: 5,
 				date: new Date(),
 				amount: 10000
+			}
+		});
+		App.Utilities.PushItem({
+			selected: true,
+			name: '生活費',
+			spendingIncome: true,	// spending
+			frequency: {
+				mode: App.Enums.FrequencyMode.Monthly,
+				count: 1,
+				month: 0,
+				date: new Date(),
+				amount: 180000
+			},
+			term: {
+				from: new Date(2017, 7),
+				to: new Date(2067, 2)
+			},
+			zogen: {
+				mode: App.Enums.FrequencyMode.OneTime,
+				count: 0,
+				month: 0,
+				date: new Date(2017, 8),
+				amount: 0
 			}
 		});
 
