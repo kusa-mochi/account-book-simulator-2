@@ -312,7 +312,7 @@ gulp.task('electron', function () {
 		packager({
 			dir: electronObjDirName,
 			out: electronDirName,
-			name: '生涯収支シミュレーター',
+			name: 'MochiLifeSimulator',
 			arch: 'x64',
 			platform: 'win32',
 			electronVersion: '1.7.6',
