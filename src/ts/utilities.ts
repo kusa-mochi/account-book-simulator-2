@@ -186,10 +186,17 @@ module App.Utilities {
 			case App.Enums.FrequencyMode.EveryYear:
 				$('input[name=frequency]:nth(1)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('frequency', false, true, false);
+				// コンボボックスの表示を更新する。
+				$('.item-detail-area .item-frequency .frequency-every-year .dropdown-toggle').html((item.frequency.month + 1) + '<span class="caret"></span>');
+				$('.item-detail-area .item-frequency .frequency-every-year .dropdown-toggle').val(item.frequency.month + 1);
 				break;
 			case App.Enums.FrequencyMode.OneTime:
 				$('input[name=frequency]:nth(2)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('frequency', false, false, true);
+				// カレンダーの表示を更新する。
+				$('.item-detail-area .item-frequency .frequency-one-time .input-append').datepicker(
+					'setDate', item.frequency.date.getFullYear() + '年' + (item.frequency.date.getMonth() + 1) + '月'
+				);
 				break;
 		}
 
@@ -218,10 +225,17 @@ module App.Utilities {
 			case App.Enums.FrequencyMode.EveryYear:
 				$('input[name=zogen]:nth(1)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('zogen', false, true, false);
+				// コンボボックスの表示を更新する。
+				$('.item-detail-area .item-zogen .frequency-every-year .dropdown-toggle').html((item.zogen.month + 1) + '<span class="caret"></span>');
+				$('.item-detail-area .item-zogen .frequency-every-year .dropdown-toggle').val(item.zogen.month + 1);
 				break;
 			case App.Enums.FrequencyMode.OneTime:
 				$('input[name=zogen]:nth(2)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('zogen', false, false, true);
+				// カレンダーの表示を更新する。
+				$('.item-detail-area .item-zogen .frequency-one-time .input-append').datepicker(
+					'setDate', item.zogen.date.getFullYear() + '年' + (item.zogen.date.getMonth() + 1) + '月'
+				);
 				break;
 		}
 

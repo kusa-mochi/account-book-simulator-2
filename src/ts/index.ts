@@ -7,6 +7,7 @@
 /// <reference path="items-area.ts"/>
 /// <reference path="item-detail-area.ts"/>
 /// <reference path="graph-area.ts"/>
+/// <reference path="offline-download-modal.ts"/>
 
 module App.Main {
 	$(document).ready(() => {

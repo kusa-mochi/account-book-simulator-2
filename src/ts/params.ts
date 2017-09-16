@@ -11,7 +11,7 @@ module App.Params {
 				mode: App.Enums.FrequencyMode.Monthly,
 				count: 1,
 				month: 0,
-				date: new Date(),
+				date: new Date(Date.now()),
 				amount: 220000
 			},
 			term: {
@@ -22,7 +22,7 @@ module App.Params {
 				mode: App.Enums.FrequencyMode.EveryYear,
 				count: 0,
 				month: 3,
-				date: new Date(),
+				date: new Date(Date.now()),
 				amount: 4000
 			}
 		});
@@ -34,7 +34,7 @@ module App.Params {
 				mode: App.Enums.FrequencyMode.EveryYear,
 				count: 0,
 				month: 5,
-				date: new Date(),
+				date: new Date(Date.now()),
 				amount: 300000
 			},
 			term: {
@@ -45,7 +45,7 @@ module App.Params {
 				mode: App.Enums.FrequencyMode.EveryYear,
 				count: 0,
 				month: 5,
-				date: new Date(),
+				date: new Date(Date.now()),
 				amount: 10000
 			}
 		});
@@ -57,7 +57,7 @@ module App.Params {
 				mode: App.Enums.FrequencyMode.Monthly,
 				count: 1,
 				month: 0,
-				date: new Date(),
+				date: new Date(Date.now()),
 				amount: 180000
 			},
 			term: {

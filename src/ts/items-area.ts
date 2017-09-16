@@ -63,7 +63,7 @@ module App.ItemsArea {
 					mode: App.Enums.FrequencyMode.Monthly,
 					count: 1,
 					month: 0,
-					date: new Date(),
+					date: new Date(Date.now()),
 					amount: 0
 				},
 				term: {
@@ -74,7 +74,7 @@ module App.ItemsArea {
 					mode: App.Enums.FrequencyMode.EveryYear,
 					count: 0,
 					month: 0,
-					date: new Date(),
+					date: new Date(Date.now()),
 					amount: 0
 				}
 			}
