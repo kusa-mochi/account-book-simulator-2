@@ -158,11 +158,15 @@ module App.ItemDetailArea {
 			autoclose: true,
 			language: 'ja'
 		}).on('changeDate', function (e) {
+			// 頻度（一度だけ）の年月が変更された場合の処理
+
 			var selectedDate = e['date'];
 			var year = selectedDate.getFullYear();
 			var month = selectedDate.getMonth();
-			// 頻度（一度だけ）の年月のデータを上書きする。
-			App.Params.items[App.Params.selectedItemIndex].frequency.date = new Date(year, month);
+			var date = new Date(year, month);
+
+			// すべてのカレンダーに同じ年月を表示し，データも更新する。
+			SetSameDateAsFrequencyToAllCalendars(date);
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
@@ -234,5 +238,25 @@ module App.ItemDetailArea {
 
 	export function DisplayItemDetailArea(): void {
 		$('.item-detail-area').css('display', 'block');
+	}
+
+	function SetSameDateAsFrequencyToAllCalendars(date: Date): void {
+		var dateString = date.getFullYear() + '年' + (date.getMonth() + 1) + '月';
+
+		// 頻度（一度だけ）の年月のデータを上書きする。
+		App.Params.items[App.Params.selectedItemIndex].frequency.date = date;
+
+		// 期間の年月を上書きする。データはイベントハンドラから更新される。
+		$(".item-detail-area .item-term .term-from .input-append").datepicker(
+			'setDate', dateString
+		);
+		$(".item-detail-area .item-term .term-to .input-append").datepicker(
+			'setDate', dateString
+		);
+
+		// 増減（一度だけ）の年月を上書きする。データはイベントハンドラから更新される。
+		$(".item-detail-area .item-zogen .frequency-one-time .input-append").datepicker(
+			'setDate', dateString
+		);
 	}
 }
