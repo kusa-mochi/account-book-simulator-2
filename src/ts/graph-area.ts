@@ -23,7 +23,7 @@ module App.GraphArea {
 					label: "累計収支",
 					fill: true,
 					lineTension: 0,
-					pointRadius: 2,
+					pointRadius: 0,
 					//背景色
 					backgroundColor: "rgba(19,101,223,0.4)",
 					//枠線の色
