@@ -44,7 +44,7 @@ module App.Utilities {
 			$('#main .items-area').prepend(
 				$('<li type="button" class="btn btn-default btn-lg item-button"></li>')
 					.append(
-					$('<input type="checkbox" class="item-button__checkbox" checked>')
+					$('<input type="checkbox" class="item-button__checkbox"' + (App.Params.items[i].selected ? ' checked' : '') + '>')
 					)
 					.append(
 					$('<div class="item-button__label"></div>')
