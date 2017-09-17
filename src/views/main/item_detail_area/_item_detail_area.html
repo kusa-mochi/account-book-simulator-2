@@ -3,8 +3,10 @@
 		<label>項目名</label>
 		<input type="text" name="item-name" class="form-control">
 	</div>
-	<label class="radio-inline active"><input checked type="radio" name="spending-income" value="spending">支出</label>
-	<label class="radio-inline"><input type="radio" name="spending-income" value="income">収入</label>
+	<div class="spending-income-radios">
+		<label class="radio active"><input checked type="radio" name="spending-income" value="spending">支出</label>
+		<label class="radio"><input type="radio" name="spending-income" value="income">収入</label>
+	</div>
 	<div class="panel-group" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default item-frequency">
 			<div class="panel-heading" role="tab" id="headingOne">
@@ -33,8 +35,12 @@
 								</button>
 								<ul class="dropdown-menu" role="menu">
 									<% for i in [1..12] : %>
-									<li><a href="#"><%- i %></a></li>
-									<% end %>
+										<li>
+											<a href="#">
+												<%- i %>
+											</a>
+										</li>
+										<% end %>
 								</ul>
 							</div>
 							<label>月</label>
@@ -114,8 +120,12 @@
 								</button>
 								<ul class="dropdown-menu" role="menu">
 									<% for i in [1..12] : %>
-									<li><a href="#"><%- i %></a></li>
-									<% end %>
+										<li>
+											<a href="#">
+												<%- i %>
+											</a>
+										</li>
+										<% end %>
 								</ul>
 							</div>
 							<label>月</label>

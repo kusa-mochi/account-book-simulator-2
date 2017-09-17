@@ -44,14 +44,21 @@
 		margin-bottom: 5px;
 	}
 
-	> .radio-inline {
-		font-size: 16px;
-		margin-top: 4px;
-		margin-bottom: 8px;
+	.spending-income-radios {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0px 46px 0px 66px;
 
-		input {
-			width: 16px;
-			height: 16px;
+		.radio {
+			font-size: 20px;
+			margin: 8px 0px 12px 0px;
+
+			input {
+				width: 20px;
+				height: 20px;
+				margin-left: -27px;
+			}
 		}
 	}
 
