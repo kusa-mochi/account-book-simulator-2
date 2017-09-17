@@ -41,7 +41,7 @@
 	}
 
 	.radio-inline {
-		margin-bottom: 5px;
+		margin-bottom: 14px;
 	}
 
 	.spending-income-radios {
@@ -126,9 +126,15 @@
 				text-align: right;
 			}
 
-			.form-inline {
-				padding: 0;
-				width: auto;
+			// .form-inline {
+			// 	padding: 0;
+			// 	width: auto;
+			// }
+
+			input {
+				&:disabled {
+					cursor: not-allowed;
+				}
 			}
 		}
 	}
@@ -167,6 +173,15 @@
 	}
 
 	.item-term {
+		.term-from,
+		.term-to {
+			input {
+				&:disabled {
+					cursor: not-allowed;
+				}
+			}
+		}
+
 		.term-to {
 			.form-group {
 				margin-bottom: 0;

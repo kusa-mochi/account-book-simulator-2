@@ -182,6 +182,9 @@ module App.Utilities {
 				$('input[name=frequency]:nth(0)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('frequency', true, false, false);
 				$('.item-detail-area .item-frequency .frequency-count input[name=frequency-count]').val(item.frequency.count);
+				App.ItemDetailArea.TermFromDatePicker.children('input').prop('disabled', false);
+				App.ItemDetailArea.TermToDatePicker.children('input').prop('disabled', false);
+				App.ItemDetailArea.ZogenDatePicker.children('input').prop('disabled', false);
 				break;
 			case App.Enums.FrequencyMode.EveryYear:
 				$('input[name=frequency]:nth(1)').prop('checked', true);
@@ -189,6 +192,10 @@ module App.Utilities {
 				// コンボボックスの表示を更新する。
 				$('.item-detail-area .item-frequency .frequency-every-year .dropdown-toggle').html((item.frequency.month + 1) + '<span class="caret"></span>');
 				$('.item-detail-area .item-frequency .frequency-every-year .dropdown-toggle').val(item.frequency.month + 1);
+
+				App.ItemDetailArea.TermFromDatePicker.children('input').prop('disabled', false);
+				App.ItemDetailArea.TermToDatePicker.children('input').prop('disabled', false);
+				App.ItemDetailArea.ZogenDatePicker.children('input').prop('disabled', false);
 				break;
 			case App.Enums.FrequencyMode.OneTime:
 				$('input[name=frequency]:nth(2)').prop('checked', true);
@@ -197,6 +204,9 @@ module App.Utilities {
 				$('.item-detail-area .item-frequency .frequency-one-time .input-append').datepicker(
 					'setDate', item.frequency.date.getFullYear() + '年' + (item.frequency.date.getMonth() + 1) + '月'
 				);
+				App.ItemDetailArea.TermFromDatePicker.children('input').prop('disabled', true);
+				App.ItemDetailArea.TermToDatePicker.children('input').prop('disabled', true);
+				App.ItemDetailArea.ZogenDatePicker.children('input').prop('disabled', true);
 				break;
 		}
 

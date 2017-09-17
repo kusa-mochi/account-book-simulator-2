@@ -1,5 +1,15 @@
 module App.ItemDetailArea {
+	export var FrequencyDatePicker: JQuery = null;
+	export var ZogenDatePicker: JQuery = null;
+	export var TermFromDatePicker: JQuery = null;
+	export var TermToDatePicker: JQuery = null;
+
 	export function SetupItemDetailArea(): void {
+		FrequencyDatePicker = $(".item-detail-area .item-frequency .frequency-one-time .input-append");
+		ZogenDatePicker = $(".item-detail-area .item-zogen .frequency-one-time .input-append");
+		TermFromDatePicker = $(".item-detail-area .item-term .term-from .input-append");
+		TermToDatePicker = $(".item-detail-area .item-term .term-to .input-append");
+
 		$('.item-detail-area .frequency-every-year').css('display', 'none');
 		$('.item-detail-area .frequency-one-time').css('display', 'none');
 
@@ -28,16 +38,25 @@ module App.ItemDetailArea {
 					App.Utilities.ChangeFrequencyMode('frequency', true, false, false);
 					App.Params.items[App.Params.selectedItemIndex].frequency.mode
 					= App.Enums.FrequencyMode.Monthly;
+					TermFromDatePicker.children('input').prop('disabled', false);
+					TermToDatePicker.children('input').prop('disabled', false);
+					ZogenDatePicker.children('input').prop('disabled', false);
 					break;
 				case 'every-year':
 					App.Utilities.ChangeFrequencyMode('frequency', false, true, false);
 					App.Params.items[App.Params.selectedItemIndex].frequency.mode
 					= App.Enums.FrequencyMode.EveryYear;
+					TermFromDatePicker.children('input').prop('disabled', false);
+					TermToDatePicker.children('input').prop('disabled', false);
+					ZogenDatePicker.children('input').prop('disabled', false);
 					break;
 				case 'one-time':
 					App.Utilities.ChangeFrequencyMode('frequency', false, false, true);
 					App.Params.items[App.Params.selectedItemIndex].frequency.mode
 					= App.Enums.FrequencyMode.OneTime;
+					TermFromDatePicker.children('input').prop('disabled', true);
+					TermToDatePicker.children('input').prop('disabled', true);
+					ZogenDatePicker.children('input').prop('disabled', true);
 					break;
 			}
 
@@ -151,7 +170,7 @@ module App.ItemDetailArea {
 	}
 
 	function SetupDatePickers(): void {
-		$(".item-detail-area .item-frequency .frequency-one-time .input-append").datepicker({
+		FrequencyDatePicker.datepicker({
 			format: "yyyy年mm月",
 			startView: "months",
 			minViewMode: "months",
@@ -174,7 +193,7 @@ module App.ItemDetailArea {
 			App.FileManager.UpdateDownloadData();
 		});
 
-		$(".item-detail-area .item-zogen .frequency-one-time .input-append").datepicker({
+		ZogenDatePicker.datepicker({
 			format: "yyyy年mm月",
 			startView: "months",
 			minViewMode: "months",
@@ -193,7 +212,7 @@ module App.ItemDetailArea {
 			App.FileManager.UpdateDownloadData();
 		});
 
-		$(".item-detail-area .item-term .term-from .input-append").datepicker({
+		TermFromDatePicker.datepicker({
 			format: "yyyy年mm月",
 			startView: "months",
 			minViewMode: "months",
@@ -212,7 +231,7 @@ module App.ItemDetailArea {
 			App.FileManager.UpdateDownloadData();
 		});
 
-		$(".item-detail-area .item-term .term-to .input-append").datepicker({
+		TermToDatePicker.datepicker({
 			format: "yyyy年mm月",
 			startView: "months",
 			minViewMode: "months",
@@ -247,15 +266,15 @@ module App.ItemDetailArea {
 		App.Params.items[App.Params.selectedItemIndex].frequency.date = date;
 
 		// 期間の年月を上書きする。データはイベントハンドラから更新される。
-		$(".item-detail-area .item-term .term-from .input-append").datepicker(
+		TermFromDatePicker.datepicker(
 			'setDate', dateString
 		);
-		$(".item-detail-area .item-term .term-to .input-append").datepicker(
+		TermToDatePicker.datepicker(
 			'setDate', dateString
 		);
 
 		// 増減（一度だけ）の年月を上書きする。データはイベントハンドラから更新される。
-		$(".item-detail-area .item-zogen .frequency-one-time .input-append").datepicker(
+		ZogenDatePicker.datepicker(
 			'setDate', dateString
 		);
 	}
