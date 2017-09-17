@@ -1,5 +1,12 @@
 module App.Params {
 	export var items: ItemData[] = new Array();
+	export var lineChart: Chart = null;
+	export var settings: SettingData = {
+		graphSetting: {
+			vMax: undefined,
+			vMin: undefined
+		}
+	};
 	export var selectedItemIndex = -1;
 	export var currentFilePath = null;
 	export function SetupNewData() {

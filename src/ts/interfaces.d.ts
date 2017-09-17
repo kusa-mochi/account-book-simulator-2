@@ -38,6 +38,15 @@ interface ItemData {
 	zogen: ZogenData
 }
 
+interface GraphSettingData {
+	vMax: number,	// 縦軸の最大値（undefinedでライブラリの自動設定に従う）
+	vMin: number	// 縦軸の最小値（undefinedでライブラリの自動設定に従う）
+}
+
+interface SettingData {
+	graphSetting: GraphSettingData
+}
+
 interface Window {
 	File,
 	FileReader,

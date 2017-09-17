@@ -1,0 +1,34 @@
+#setting-modal {
+	.modal-header {
+		border-bottom: none;
+	}
+
+	.modal-body {
+		.tab-content {
+			.tab-pane {
+				padding: 15px 15px 0px 15px;
+
+				.graph-setting-y-max,
+				.graph-setting-y-min {
+					display: flex;
+					align-items: center;
+					margin-bottom: 8px;
+
+					.graph-setting-y-max__label,
+					.graph-setting-y-min__label {
+						margin-right: 16px;
+					}
+
+					.graph-setting-y-max__auto-checkbox-container,
+					.graph-setting-y-min__auto-checkbox-container {
+						margin-right: 8px;
+					}
+				}
+			}
+		}
+	}
+
+	.modal-footer {
+		border-top: none;
+	}
+}

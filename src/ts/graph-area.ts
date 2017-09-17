@@ -1,14 +1,12 @@
 module App.GraphArea {
 
-	var lineChart: Chart = null;
-
 	export function SetupGraphArea(): void {
 		//折れ線グラフ
 		var w = $('.graph-area').width();
 		var h = $('.graph-area').height();
 		$('#LineChart').attr('width', w);
 		$('#LineChart').attr('height', h);
-		lineChart = new Chart($('#LineChart'), {
+		App.Params.lineChart = new Chart($('#LineChart'), {
 			//グラフの種類
 			type: 'line',
 			//データの設定
@@ -58,9 +56,9 @@ module App.GraphArea {
 	}
 
 	export function ResetGraph(): void {
-		lineChart.data.labels = [''];
-		lineChart.data.datasets[0].data = [0];
-		lineChart.update();
+		App.Params.lineChart.data.labels = [''];
+		App.Params.lineChart.data.datasets[0].data = [0];
+		App.Params.lineChart.update();
 	}
 
 	export function Data2Graph(): void {
@@ -102,7 +100,7 @@ module App.GraphArea {
 			graphLabels[i] = '' + d.getFullYear() + '/' + (d.getMonth() + 1);
 			d = App.Utilities.GetNextMonth(d);
 		}
-		lineChart.data.labels = graphLabels;
+		App.Params.lineChart.data.labels = graphLabels;
 
 
 		d = from;
@@ -152,8 +150,8 @@ module App.GraphArea {
 			d = App.Utilities.GetNextMonth(d);
 		}
 
-		lineChart.data.datasets[0].data = graphData;
-		lineChart.update();
+		App.Params.lineChart.data.datasets[0].data = graphData;
+		App.Params.lineChart.update();
 	}
 
 	function SkipIfNull(value: any, index: number, values: any) {

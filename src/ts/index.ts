@@ -7,6 +7,7 @@
 /// <reference path="items-area.ts"/>
 /// <reference path="item-detail-area.ts"/>
 /// <reference path="graph-area.ts"/>
+/// <reference path="setting-modal.ts"/>
 /// <reference path="offline-download-modal.ts"/>
 
 module App.Main {
@@ -24,6 +25,7 @@ module App.Main {
 		App.ItemsArea.SetupItemButtons();
 		App.GraphArea.SetupGraphArea();
 		App.ItemDetailArea.SetupItemDetailArea();
-		App.OfflineDownloadMoal.SetupOfflineDownloadModal();
+		App.SettingModal.SetupSettingModal();
+		App.OfflineDownloadModal.SetupOfflineDownloadModal();
 	});
 }
