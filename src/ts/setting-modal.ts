@@ -1,18 +1,28 @@
 module App.SettingModal {
-	var GraphYMaxInput: JQuery = null;
-	var GraphYMinInput: JQuery = null;
+	var GraphYMaxTextbox: JQuery = null;
+	export var GraphYMaxNumeric: AutoNumeric = null;
+	var GraphYMinTextbox: JQuery = null;
+	export var GraphYMinNumeric: AutoNumeric = null;
 	var GraphYMaxAutoCheckbox: JQuery = null;
 	var GraphYMinAutoCheckbox: JQuery = null;
 
 	export function SetupSettingModal(): void {
-		GraphYMaxInput = $('#graph-setting-tab input[name=graph-setting-y-max]');
-		GraphYMinInput = $('#graph-setting-tab input[name=graph-setting-y-min]');
+		GraphYMaxTextbox = $('#graph-setting-tab input[name=graph-setting-y-max]');
+		GraphYMaxNumeric = new AutoNumeric(
+			'#graph-setting-tab input[name=graph-setting-y-max]',
+			App.Params.amountTextboxOptions
+		);
+		GraphYMinTextbox = $('#graph-setting-tab input[name=graph-setting-y-min]');
+		GraphYMinNumeric = new AutoNumeric(
+			'#graph-setting-tab input[name=graph-setting-y-min]',
+			App.Params.amountTextboxOptions
+		);
 		GraphYMaxAutoCheckbox = $('#graph-setting-tab input[name=graph-setting-y-max__auto-checkbox]');
 		GraphYMinAutoCheckbox = $('#graph-setting-tab input[name=graph-setting-y-min__auto-checkbox]');
 		$('#setting-modal .nav-tabs a[href="#graph-setting-tab"]').tab('show');
 
-		GraphYMaxInput.prop('disabled', true);
-		GraphYMinInput.prop('disabled', true);
+		GraphYMaxTextbox.prop('disabled', true);
+		GraphYMinTextbox.prop('disabled', true);
 		GraphYMaxAutoCheckbox.prop('checked', true);
 		GraphYMinAutoCheckbox.prop('checked', true);
 
@@ -23,24 +33,30 @@ module App.SettingModal {
 			// 縦軸最大値
 			auto = App.Params.settings.graphSetting.vMax == undefined;
 			GraphYMaxAutoCheckbox.prop('checked', auto);
-			GraphYMaxInput.prop('disabled', auto);
-			GraphYMaxInput.val(auto ? '' : App.Params.settings.graphSetting.vMax);
+			GraphYMaxTextbox.prop('disabled', auto);
+			GraphYMaxNumeric.set(
+				auto ? undefined : App.Params.settings.graphSetting.vMax,
+				App.Params.amountTextboxOptions
+			);
 
 			// 縦軸最小値
 			auto = App.Params.settings.graphSetting.vMin == undefined;
 			GraphYMinAutoCheckbox.prop('checked', auto);
-			GraphYMinInput.prop('disabled', auto);
-			GraphYMinInput.val(auto ? '' : App.Params.settings.graphSetting.vMin);
+			GraphYMinTextbox.prop('disabled', auto);
+			GraphYMinNumeric.set(
+				auto ? undefined : App.Params.settings.graphSetting.vMin,
+				App.Params.amountTextboxOptions
+			);
 		});
 
 		// 縦軸最大値の「自動」チェックボックスの状態が変化した場合の処理
 		GraphYMaxAutoCheckbox.on('change', function (e) {
-			GraphYMaxInput.prop('disabled', GraphYMaxAutoCheckbox.prop('checked'));
+			GraphYMaxTextbox.prop('disabled', GraphYMaxAutoCheckbox.prop('checked'));
 		});
 
 		// 縦軸最小値の「自動」チェックボックスの状態が変化した場合の処理
 		GraphYMinAutoCheckbox.on('change', function (e) {
-			GraphYMinInput.prop('disabled', GraphYMinAutoCheckbox.prop('checked'));
+			GraphYMinTextbox.prop('disabled', GraphYMinAutoCheckbox.prop('checked'));
 		});
 
 		// OKボタンが押された場合の処理
@@ -62,10 +78,10 @@ module App.SettingModal {
 	}
 
 	function GetYMaxValue(): number {
-		return GraphYMaxAutoCheckbox.prop('checked') ? undefined : +GraphYMaxInput.val();
+		return GraphYMaxAutoCheckbox.prop('checked') ? undefined : +GraphYMaxNumeric.getNumber();
 	}
 
 	function GetYMinValue(): number {
-		return GraphYMinAutoCheckbox.prop('checked') ? undefined : +GraphYMinInput.val();
+		return GraphYMinAutoCheckbox.prop('checked') ? undefined : +GraphYMinNumeric.getNumber();
 	}
 }

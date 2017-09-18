@@ -171,7 +171,7 @@ module App.Utilities {
 		var item = App.Params.items[itemIdx];
 
 		// 費用項目名
-		$('.item-detail-area .item-name input[name=item-name]').val(item.name);
+		App.ItemDetailArea.ItemNameTextbox.val(item.name);
 
 		// 支出／収入
 		$(item.spendingIncome ? 'input[name=spending-income]:nth(0)' : 'input[name=spending-income]:nth(1)').prop('checked', true);
@@ -201,7 +201,7 @@ module App.Utilities {
 				$('input[name=frequency]:nth(2)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('frequency', false, false, true);
 				// カレンダーの表示を更新する。
-				$('.item-detail-area .item-frequency .frequency-one-time .input-append').datepicker(
+				App.ItemDetailArea.FrequencyDatePicker.datepicker(
 					'setDate', item.frequency.date.getFullYear() + '年' + (item.frequency.date.getMonth() + 1) + '月'
 				);
 				App.ItemDetailArea.TermFromDatePicker.children('input').prop('disabled', true);
@@ -211,17 +211,17 @@ module App.Utilities {
 		}
 
 		// 頻度：金額
-		$('.item-detail-area .item-frequency .amount input[name=amount]').val(item.frequency.amount);
+		App.ItemDetailArea.FrequencyAmountNumeric.set(item.frequency.amount, App.Params.amountTextboxOptions);
 
 		// 期間：開始
 		var dateFrom = App.Params.items[itemIdx].term.from;
-		$(".item-detail-area .item-term .term-from .input-append").datepicker(
+		App.ItemDetailArea.TermFromDatePicker.datepicker(
 			'setDate', dateFrom.getFullYear() + '年' + (dateFrom.getMonth() + 1) + '月'
 		);
 
 		// 期間：終了
 		var dateTo: Date = App.Params.items[itemIdx].term.to;
-		$(".item-detail-area .item-term .term-to .input-append").datepicker(
+		App.ItemDetailArea.TermToDatePicker.datepicker(
 			'setDate', dateTo.getFullYear() + '年' + (dateTo.getMonth() + 1) + '月'
 		);
 
@@ -243,14 +243,14 @@ module App.Utilities {
 				$('input[name=zogen]:nth(2)').prop('checked', true);
 				App.Utilities.ChangeFrequencyMode('zogen', false, false, true);
 				// カレンダーの表示を更新する。
-				$('.item-detail-area .item-zogen .frequency-one-time .input-append').datepicker(
+				App.ItemDetailArea.ZogenDatePicker.datepicker(
 					'setDate', item.zogen.date.getFullYear() + '年' + (item.zogen.date.getMonth() + 1) + '月'
 				);
 				break;
 		}
 
 		// 金額の増減：金額
-		$('.item-detail-area .item-zogen .amount input[name=amount]').val(item.zogen.amount);
+		App.ItemDetailArea.ZogenAmountNumeric.set(item.zogen.amount, App.Params.amountTextboxOptions);
 	}
 
 	export function IsIncludedInItems(itemName: string): boolean {

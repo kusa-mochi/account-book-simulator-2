@@ -52,3 +52,9 @@ interface Window {
 	FileReader,
 	FileList
 }
+
+declare class AutoNumeric {
+	constructor(selector: string, options: object);
+	getNumber(): number;
+	set(n: number, options?: object): void
+}

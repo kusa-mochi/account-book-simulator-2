@@ -30,6 +30,7 @@ var jsLibraries = [
 	'./node_modules/chart.js/dist/Chart.bundle.min.js',
 	'./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
 	'./node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.ja.min.js',
+	'./node_modules/autonumeric/dist/autoNumeric.min.js',
 	path.join(sourceDirName, 'lib/bootstrap-number-input/bootstrap-number-input.js')
 ];
 var cssLibraries = [

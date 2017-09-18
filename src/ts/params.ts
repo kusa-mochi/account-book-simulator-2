@@ -9,6 +9,8 @@ module App.Params {
 	};
 	export var selectedItemIndex = -1;
 	export var currentFilePath = null;
+	export var amountTextboxOptions = null;
+
 	export function SetupNewData() {
 		App.Utilities.PushItem({
 			selected: true,
@@ -82,5 +84,10 @@ module App.Params {
 
 		selectedItemIndex = 0;
 		currentFilePath = undefined;
+		amountTextboxOptions = {
+			decimalCharacter : '.',
+			digitGroupSeparator : ',',
+			decimalPlaces: 0
+		}
 	}
 }

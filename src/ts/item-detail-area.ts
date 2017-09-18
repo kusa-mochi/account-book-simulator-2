@@ -1,10 +1,28 @@
 module App.ItemDetailArea {
+	export var ItemNameTextbox: JQuery = null;
+	var FrequencyAmountTextbox: JQuery = null;
+	export var FrequencyAmountNumeric: AutoNumeric = null;
+	var ZogenAmountTextbox: JQuery = null;
+	export var ZogenAmountNumeric: AutoNumeric = null;
+
 	export var FrequencyDatePicker: JQuery = null;
 	export var ZogenDatePicker: JQuery = null;
 	export var TermFromDatePicker: JQuery = null;
 	export var TermToDatePicker: JQuery = null;
 
 	export function SetupItemDetailArea(): void {
+		ItemNameTextbox = $('.item-detail-area .item-name .form-control');
+		FrequencyAmountTextbox = $('.item-detail-area .item-frequency .amount .form-control');
+		FrequencyAmountNumeric = new AutoNumeric(
+			'.item-detail-area .item-frequency .amount .form-control',
+			App.Params.amountTextboxOptions
+		);
+		ZogenAmountTextbox = $('.item-detail-area .item-zogen .amount .form-control');
+		ZogenAmountNumeric = new AutoNumeric(
+			'.item-detail-area .item-zogen .amount .form-control',
+			App.Params.amountTextboxOptions
+		);
+
 		FrequencyDatePicker = $(".item-detail-area .item-frequency .frequency-one-time .input-append");
 		ZogenDatePicker = $(".item-detail-area .item-zogen .frequency-one-time .input-append");
 		TermFromDatePicker = $(".item-detail-area .item-term .term-from .input-append");
@@ -14,8 +32,8 @@ module App.ItemDetailArea {
 		$('.item-detail-area .frequency-one-time').css('display', 'none');
 
 		// 項目名が変更された場合の処理
-		$('.item-detail-area .item-name .form-control').keyup((e) => {
-			App.Params.items[App.Params.selectedItemIndex].name = '' + $('.item-detail-area .item-name .form-control').val();
+		ItemNameTextbox.keyup((e) => {
+			App.Params.items[App.Params.selectedItemIndex].name = '' + ItemNameTextbox.val();
 
 			App.Utilities.DataToGUI();
 			App.FileManager.UpdateDownloadData();
@@ -120,14 +138,19 @@ module App.ItemDetailArea {
 		});
 
 		// 頻度：金額が変更された場合の処理
-		$('.item-detail-area .item-frequency .amount .form-control').keyup((e) => {
-			App.Params.items[App.Params.selectedItemIndex].frequency.amount = +$('.item-detail-area .item-frequency .amount .form-control').val();
+		var onFrequencyAmountChanged = (e) => {
+			App.Params.items[App.Params.selectedItemIndex].frequency.amount = FrequencyAmountNumeric.getNumber();
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
 
 			App.FileManager.UpdateDownloadData();
-		});
+		};
+		FrequencyAmountTextbox.keyup(onFrequencyAmountChanged);
+		FrequencyAmountTextbox.change(onFrequencyAmountChanged);
+		FrequencyAmountTextbox.on('mousewheel', onFrequencyAmountChanged);
+		FrequencyAmountTextbox.on('DOMMouseScroll', onFrequencyAmountChanged);
+		FrequencyAmountTextbox.on('onmousewheel', onFrequencyAmountChanged);
 
 		// 増減：毎月・毎年・一度だけ　が変更された場合の処理
 		$('.item-detail-area .item-zogen input[type=radio][name=zogen]').change(function () {
@@ -156,14 +179,19 @@ module App.ItemDetailArea {
 		});
 
 		// 増減：金額が変更された場合の処理
-		$('.item-detail-area .item-zogen .amount .form-control').keyup((e) => {
-			App.Params.items[App.Params.selectedItemIndex].zogen.amount = +$('.item-detail-area .item-zogen .amount .form-control').val();
+		var onZogenAmountChanged = (e) => {
+			App.Params.items[App.Params.selectedItemIndex].zogen.amount = ZogenAmountNumeric.getNumber();
 
 			// グラフを更新する。
 			App.GraphArea.Data2Graph();
 
 			App.FileManager.UpdateDownloadData();
-		});
+		};
+		ZogenAmountTextbox.keyup(onZogenAmountChanged);
+		ZogenAmountTextbox.change(onZogenAmountChanged);
+		ZogenAmountTextbox.on('mousewheel', onZogenAmountChanged);
+		ZogenAmountTextbox.on('DOMMouseScroll', onZogenAmountChanged);
+		ZogenAmountTextbox.on('onmousewheel', onZogenAmountChanged);
 
 		// カレンダーコントロールの初期設定を行う。
 		SetupDatePickers();
